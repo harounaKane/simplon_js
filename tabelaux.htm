@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        tr, td, th{
+            border: 1px solid;
+        }
+        table{
+            border-collapse: collapse;
+        }
+        tr:nth-child(even){
+            background-color: rgb(136, 110, 76);
+        }
+        tr:nth-child(odd){
+            background-color: rgb(94, 174, 93);
+        }
+
+        li:nth-child(even){
+            color: green;
+        }
+
+        li:hover{
+            background-color: rgba(0, 0, 0, 0.05);
+            color: red;
+            transition: all 0.2s ease-in;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <caption>Liste Client</caption>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Villle</th>
+        </tr>
+        <tr>
+            <td>Julie</td>
+            <td>Dupond</td>
+            <td>Aix</td>
+        </tr>
+        <tr>
+            <td>Jean</td>
+            <td>Pierre</td>
+            <td>Paris</td>
+        </tr>
+        <tr>
+            <td>Julie</td>
+            <td>Dupond</td>
+            <td>Aix</td>
+        </tr>
+        <tr>
+            <td>Jean</td>
+            <td>Pierre</td>
+            <td>Paris</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <table>
+        <caption>Liste article</caption>
+        <tr>
+            <th>Article</th>
+            <th>Prix</th>
+            <th>Qtte</th>
+            <th>ttc</th>
+        </tr>
+        <tr>
+            <td>Julie</td>
+            <td>100</td>
+            <td rowspan="2">5</td>
+            <td>500</td>
+        </tr>
+        <tr>
+            <td>Jean</td>
+            <td>290</td>
+            <td>7250</td>
+        </tr>
+        <tr>
+            <td colspan="3">Total</td>
+            <td>7750€</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <ul>
+        <li>lorem5</li>
+        <li>lorem5</li>
+        <li>lorem5</li>
+        <li>lorem5</li>
+        <li>lorem5</li>
+        <li>lorem5</li>
+        <li>lorem5</li>
+        <li>lorem5</li>
+        <li>lorem5</li>
+        <li>lorem5</li>
+    </ul>
+    
+</body>
+</html>
