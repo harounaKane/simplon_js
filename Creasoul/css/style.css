@@ -1,0 +1,79 @@
+img{
+    max-width: 100%;
+}
+
+body{
+    background-color: RGB(242, 241, 244);
+}
+
+header, main{
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+header{
+    text-align: center;
+}
+
+nav{
+    background-color: RGB(39, 174, 153);
+    padding: 20px;
+}
+
+nav a{
+    display: inline-block;
+    text-decoration: none;
+    color: RGB(242, 241, 244);
+    width: 33%;
+}
+
+nav a:hover{
+    color: RGB(245, 126, 32);
+    transition: all .2s ease 0s;
+}
+
+section{
+    display: inline-block;
+    width: 67%;
+}
+
+aside{
+    display: inline-block;
+    width: 28%;
+    background-color: RGB(166, 192, 84);
+    margin-left: 2%;
+    padding: 13px;
+    vertical-align: top;
+}
+
+h1, h2{
+    color: RGB(39, 174, 153);
+    border-bottom: 1px solid RGB(39, 174, 153);
+}
+
+span{
+    color: RGB(39, 174, 153);
+}
+
+@media(max-width: 800px){
+    nav a{
+        display: block;
+        width: 100%;
+        margin: 2% 0;
+    }
+
+    header, main{
+        max-width: 100%;
+    }
+
+    section, aside{
+        display: block;
+        width: 98%;
+        margin: 0;
+        padding: 5px;
+    }
+}
+
+@media(max-width: 500px){
+    aside{display: none;}
+}
