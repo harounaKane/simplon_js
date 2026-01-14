@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{max-width: 100%;}
+        section{
+            background-color: rgb(190, 184, 184);
+            text-align: center;
+        }
+
+        img{
+            border-radius: 100%;
+        }
+        
+        article{
+            display: block;
+            width: 90%;
+        }
+
+        aside{
+            display: none;
+            background-color: red;
+            padding: 20px;
+        }
+
+        @media(min-width: 800px){
+            article{
+                display: inline-block;
+                width: 27%;
+                margin-left: 5%;
+            }
+
+        aside{display: block;}
+
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <article>
+            <h3>Titre 1</h3>
+            <img src="img/logo.png" alt="">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quaerat laboriosam molestias deserunt asperiores voluptatem, ex, delectus atque natus ad ut, dolorum aut harum sunt voluptates expedita ducimus maiores omnis.
+            </p>
+        </article>
+        <article>
+            <h3>Titre 2</h3>
+            <img src="img/logo.png" alt="">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quaerat laboriosam molestias deserunt asperiores voluptatem, ex, delectus atque natus ad ut, dolorum aut harum sunt voluptates expedita ducimus maiores omnis.
+            </p>
+        </article>
+        <article>
+            <h3>Titre 3</h3>
+            <img src="img/logo.png" alt="">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quaerat laboriosam molestias deserunt asperiores voluptatem, ex, delectus atque natus ad ut, dolorum aut harum sunt voluptates expedita ducimus maiores omnis.
+            </p>
+        </article>
+    </section>
+    <aside>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur exercitationem aliquam, corporis reprehenderit corrupti nostrum ipsum eius repellat dicta aperiam saepe, rem maiores reiciendis libero! Aperiam id et consequuntur ratione?
+    </aside>
+</body>
+</html>
