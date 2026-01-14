@@ -5,65 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        img{max-width: 100%;}
-        section{
-            background-color: rgb(190, 184, 184);
+        nav{
+            display: flex;
+            justify-content: space-between;
             text-align: center;
         }
+    nav a{
+        background-color: rgb(99, 121, 121);
+        margin: 1%;
+    }
 
-        img{
-            border-radius: 100%;
-        }
-        
-        article{
-            display: block;
-            width: 90%;
-        }
+    #l2{
+        flex: 2;
+    }
+    
+    article{
+        border: 12px solid black;
+        margin: 10px;
+    }
 
-        aside{
-            display: none;
-            background-color: red;
-            padding: 20px;
-        }
+    main{
+        display: flex;
+        justify-content: space-between;
+    }
 
-        @media(min-width: 800px){
-            article{
-                display: inline-block;
-                width: 27%;
-                margin-left: 5%;
-            }
-
-        aside{display: block;}
-
-        }
+    iframe{width: 100%;}
     </style>
 </head>
 <body>
-    <section>
-        <article>
-            <h3>Titre 1</h3>
-            <img src="img/logo.png" alt="">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quaerat laboriosam molestias deserunt asperiores voluptatem, ex, delectus atque natus ad ut, dolorum aut harum sunt voluptates expedita ducimus maiores omnis.
-            </p>
-        </article>
-        <article>
-            <h3>Titre 2</h3>
-            <img src="img/logo.png" alt="">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quaerat laboriosam molestias deserunt asperiores voluptatem, ex, delectus atque natus ad ut, dolorum aut harum sunt voluptates expedita ducimus maiores omnis.
-            </p>
-        </article>
-        <article>
-            <h3>Titre 3</h3>
-            <img src="img/logo.png" alt="">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quaerat laboriosam molestias deserunt asperiores voluptatem, ex, delectus atque natus ad ut, dolorum aut harum sunt voluptates expedita ducimus maiores omnis.
-            </p>
-        </article>
-    </section>
-    <aside>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur exercitationem aliquam, corporis reprehenderit corrupti nostrum ipsum eius repellat dicta aperiam saepe, rem maiores reiciendis libero! Aperiam id et consequuntur ratione?
-    </aside>
+    <nav>
+        <a href="">Mon Lien 1</a>
+        <a href="" id="l2">Lien 2</a>
+        <a href="">Lien 3</a>
+    </nav>
+
+    <main>
+        <article></article>
+        <article></article>
+    </main>
+
+    <iframe width="975" height="548" src="https://www.youtube.com/embed/8erDDfJqWI4" title="Venezuela: le retour de l&#39;interventionnisme américain?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1446.3116136894694!2d5.422640307199093!3d43.531049060704156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1768398273449!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </body>
 </html>
