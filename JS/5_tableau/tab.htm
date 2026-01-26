@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>les Array</h1>
+
+    <script>
+        // let tab = [12, 15, 13, -10, 8, 9, -13, 14];
+
+        let tabPersonnes = [
+        {
+            prenom: "Toto",
+            ville: "Aix",
+            age: 20
+        },
+        {
+            prenom: "Tata",
+            ville: "Nice",
+            age: 55
+        },{
+            prenom: "Toto",
+            ville: "Aix",
+            age: 40
+        },
+        {
+            prenom: "Tata",
+            ville: "Nice",
+            age: 35
+        },{
+            prenom: "Toto",
+            ville: "Aix",
+            age: 18
+        },
+        {
+            prenom: "Tata",
+            ville: "Nice",
+            age: 27
+        },{
+            prenom: "Toto",
+            ville: "Aix",
+            age: 30
+        },
+        {
+            prenom: "Tata",
+            ville: "Nice",
+            age: 25
+        }
+       ];
+
+        for( let person of tabPersonnes ){
+            if(person.age >= 25 && person.age <= 35){
+                for(let cle in person){
+                    console.log(cle, ": ", person[cle]);
+                }
+            }
+        }
+        
+
+    </script>
+
+</body>
+</html>

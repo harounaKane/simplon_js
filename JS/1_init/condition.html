@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Conditions</h1>
+
+    <script>
+
+        let nombre1 = prompt("entre un nombre");
+
+        if( nombre1 >= 30 && nombre1 <= 90 ){
+            
+        }
+/*
+        // RECUP DES VALEURS AU CLAVIER
+        let n1 = parseFloat(prompt("Entrez nombre 1 :"));
+        let n2 = parseFloat(prompt("Entrez nombre 2 :"));
+        let op = prompt("opérateur (+, -, *, /)");
+
+
+        // TESTER SI n1 & n2 SONT DES NOMBRES avec isNaN qui return vrai ou faux
+        if( !isNaN(n1) && !isNaN(n2)){
+            // CONDITIONS POUR TESTER LE TYPE D'OPERATION(+, -, *, /)
+            if( op == "+" || op === "addition" ){
+                console.log( n1 +"+"+n2 +" = " + (n1 + n2) );
+            }
+            else if( op === "-" ){
+                console.log( n1 +"-"+n2 +" = " + (n1 - n2) );
+            }
+            else if( op === "/" ){
+                console.log( n1 +"/"+n2 +" = " + (n1 / n2) );
+            }
+            else if( op === "*" ){
+                console.log( n1 +"*"+n2 +" = " + (n1 * n2) );
+            }else{ // si opérateur incorrect
+                console.log("Opérateur inconito");
+            }
+        }else{ // si valeurs (n1 ou n2) ne sont pas numériques
+            console.log('Veillez saisir des val numériques');
+        }
+            */
+
+        // Demander un nombre et tester si ce nombre est compris dans l’intervalle [30, 90]
+
+        
+        let prenom1 = prompt("prenom 1 : ");
+        let prenom2 = prompt("prenom 2 : ");
+        let prenom3 = prompt("prenom 3 : ");
+
+        if( prenom1 < prenom2 && prenom2 < prenom3 ){
+            console.log("les prénoms sont dans l'ordre");
+        }else{
+            console.log("les prénoms ne sont pas dans l'ordre");
+        }
+
+
+        let nombre = parseInt(prompt("Entrez un nombre: "));
+
+        if(!isNaN( nombre )){
+            if( nombre > 0 ){
+                console.log(nombre +" est un nombre positif");
+            }else if( nombre < 0){
+                console.log(nombre +" n'est pas un nombre négatif");
+            }else{
+                console.log(nombre +" est un nombre null");
+            }
+        } 
+
+       
+
+
+    </script>
+</body>
+</html>

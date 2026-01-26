@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Jour</h1>
+
+    <script>
+
+        console.log( (2088%400 == 0) || (2088%100 != 0 && 2088%4 == 0) )
+            // numero_du_jour
+        let numeroDuJour = parseInt( prompt("Entrer un numéro de jour"));
+
+        switch(numeroDuJour){
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                console.log("Semaine de boulot");
+                break;
+           
+            case 6: 
+            case 7: 
+                console.log("Week-end");
+                break;
+    
+            default: 
+                console.log("numéro Jour inconnu");
+        }
+
+
+
+        /*if( numeroDuJour == 1 ){
+            console.log("Lundi")
+        }else if(numeroDuJour == 2){
+            console.log("Mardi")
+        }*/
+    </script>
+</body>
+</html>

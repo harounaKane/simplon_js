@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Date</h1>
+
+    <script>
+        let jour = parseInt( prompt("Entrer un jour: ") );
+        let mois = parseInt( prompt("Entrer un mois: ") );
+        let annee = parseInt( prompt("Entrer une année: ") );
+        let nbreMaxJour;
+
+        if( mois >= 1 && mois <= 12 ){
+            switch( mois ){
+                // cas nbre max de jour (30)
+                case 4: case 6: case 9: case 11: 
+                    nbreMaxJour = 30;
+                    break;
+                case 2:
+                    if(annee%400 == 0 || (annee%100 != 0 && annee%4 == 0) ){
+                        nbreMaxJour = 29;
+                    }else{
+                        nbreMaxJour = 28;
+                    }
+                    break;
+                default: 
+                    nbreMaxJour = 31;
+            }
+        }
+
+        if( jour >= 1 && jour <= nbreMaxJour ){
+            console.log(jour+"/"+mois+"/"+annee);
+        }
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calcul de remise</h1>
+
+    <script>
+        // Récupération du montant au clavier
+        let montant = parseFloat( prompt("saisir un montant: ") );
+        let remise = 0;
+        let montantNet;
+
+        if( montant >= 2000 && montant <= 5000 ){
+            // On applique 5%
+            remise = montant * 5 / 100;
+        }else if( montant > 5000 ){
+            // On applique 10%
+            remise = montant * 10 / 100;
+        }
+        
+        montantNet = montant - remise;
+        console.log("Montant net à payer : " + montantNet +" € pour une remise de " + remise +" €");
+
+    </script>
+</body>
+</html>

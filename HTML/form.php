@@ -1,3 +1,8 @@
+<?php
+    $sexe = "femme";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,10 +39,10 @@
         <fieldset>
             <legend>Sexe</legend>
              <div>
-                <input type="radio" name="sexe" id="femme" value="femme" >
+                <input <?= ($sexe == 'femme') ? 'checked' : '' ?> type="radio" name="sexe" id="femme" value="femme" >
                 <label for="femme">Femme</label>
             </div> <div>
-                <input type="radio" name="sexe" id="homme" value="homme">
+                <input <?= ($sexe == 'homme') ? 'checked' : '' ?> type="radio" name="sexe" id="homme" value="homme">
                 <label for="homme">Homme</label>
             </div>
         </fieldset>

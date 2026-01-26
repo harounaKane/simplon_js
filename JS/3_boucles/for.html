@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Boucle for</h1>
+
+    <script>
+     /*   let nombre = parseInt( prompt("Un nombre: "));
+        let somme = 0;
+
+        while( nombre != 0 ){
+            somme += nombre;
+            nombre = parseInt( prompt("Un nombre: "));
+        }
+
+       console.log("La somme est de : " + somme);
+
+
+        let nombre, somme = 0;
+        do{
+            nombre = parseInt( prompt("Un nombre: "));
+            somme += nombre;
+        }while(nombre != 0);
+
+        console.log("La somme est de : " + somme);*/
+
+        let somme = 0;
+
+        while( true ){
+            let nombre = parseInt( prompt("Un nombre: "));
+            somme += nombre;
+
+            if( nombre == 0 ){
+                break;
+            }
+        }
+        console.log("La somme est de : " + somme);
+    </script>
+
+</body>
+</html>
