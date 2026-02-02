@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css">
+  <title>Exercice DOM - Page riche</title>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <img id="logo" src="https://picsum.photos/seed/logo/88/88" alt="Logo">
+      <div>
+        <h1 id="site-title">Portail Formation – DOM</h1>
+        <p id="site-subtitle">Page de démonstration (HTML/CSS) – à manipuler en JavaScript</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+
+      <!-- Bloc gauche -->
+      <section class="card" id="intro-card">
+        <div class="section-title">
+          <h2>Bienvenue</h2>
+          <span class="badge" id="status-badge">Statut : en cours</span>
+        </div>
+
+        <p class="text">Objectif : manipuler le DOM sans événements.</p>
+        <p class="text">Tu vas sélectionner des éléments par id, classe et balise.</p>
+        <p class="text note">Astuce : commence par querySelector / querySelectorAll.</p>
+
+        <div class="row">
+          <a class="btn primary link" href="https://developer.mozilla.org/fr/docs/Web/API/Document/querySelector" target="_blank">MDN querySelector</a>
+          <a class="btn link" href="https://developer.mozilla.org/fr/docs/Web/API/Element/classList" target="_blank">MDN classList</a>
+          <a class="btn danger link" href="https://example.com" target="_blank">Lien test</a>
+        </div>
+      </section>
+
+      <!-- Bloc droite -->
+      <aside class="card" id="info-card">
+        <h2>Infos</h2>
+        <p class="info-line">Groupe : <strong id="group-name">Aix – JS</strong></p>
+        <p class="info-line">Semaine : <strong id="week-number">1</strong></p>
+        <p class="info-line">Mode : <strong class="mode">Présentiel</strong></p>
+
+        <div class="section-title">
+          <h3>Ressources</h3>
+        </div>
+
+        <ul id="resources">
+          <li class="resource-item"><a class="resource-link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript" target="_blank">JavaScript (MDN)</a></li>
+          <li class="resource-item"><a class="resource-link" href="https://developer.mozilla.org/fr/docs/Web/HTML" target="_blank">HTML (MDN)</a></li>
+          <li class="resource-item"><a class="resource-link" href="https://developer.mozilla.org/fr/docs/Web/CSS" target="_blank">CSS (MDN)</a></li>
+        </ul>
+
+        <p class="muted" id="debug-zone">Debug : aucune action</p>
+      </aside>
+    </div>
+
+    <section class="card" id="articles-card" style="margin-top:16px;">
+      <div class="section-title">
+        <h2>Articles</h2>
+        <h3 id="articles-count">0 article</h3>
+      </div>
+
+      <div class="articles" id="articles">
+        <article class="article post">
+          <img src="https://picsum.photos/seed/aix/640/360" alt="Aix">
+          <div class="content">
+            <h4 class="post-title">Aix-en-Provence</h4>
+            <div class="meta">
+              <span class="tag">Ville</span>
+              <span class="tag">Culture</span>
+              <a class="post-link" href="https://fr.wikipedia.org/wiki/Aix-en-Provence" target="_blank">Voir</a>
+            </div>
+            <p class="post-text">Texte à modifier en JS.</p>
+          </div>
+        </article>
+
+        <article class="article post">
+          <img src="https://picsum.photos/seed/js/640/360" alt="JS">
+          <div class="content">
+            <h4 class="post-title">JavaScript</h4>
+            <div class="meta">
+              <span class="tag">Langage</span>
+              <span class="tag">DOM</span>
+              <a class="post-link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript" target="_blank">Voir</a>
+            </div>
+            <p class="post-text">Texte à modifier en JS.</p>
+          </div>
+        </article>
+
+        <article class="article post">
+          <img src="https://picsum.photos/seed/react/640/360" alt="React">
+          <div class="content">
+            <h4 class="post-title">React</h4>
+            <div class="meta">
+              <span class="tag">Framework</span>
+              <span class="tag">UI</span>
+              <a class="post-link" href="https://react.dev" target="_blank">Voir</a>
+            </div>
+            <p class="post-text">Texte à modifier en JS.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="text footer-line">© <span id="year">2026</span> — Harouna KANE — <a class="link" href="https://example.com" target="_blank">Mentions</a></p>
+    <p class="muted footer-line" id="footer-note">Footer prêt à être modifié en JS.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

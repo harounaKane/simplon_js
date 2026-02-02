@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      
+    <h2 id="nbreProd">Nombre d'article: </h2>
+
+    <h3>Liste de produits :</h3>
+    <ul>
+    </ul>
+
+    <script>
+        let nbreProd = document.getElementById("nbreProd");
+        let listeUl = document.querySelector("ul");
+        
+        let courses = ["lait", "beurre"];
+
+        function ajouter(prod){
+            courses.push( prod );
+            afficher();
+        }
+
+        function afficher(){
+            nbreProd.innerHTML = "Nombre d'article: " + courses.length;
+            listeUl.innerHTML = "";
+
+            for(let c of courses){
+                listeUl.innerHTML += `<li>${c}</li>`;
+            }
+
+            if( courses.length == 0 ){
+                listeUl.innerHTML += `<li>Liste de produit vide</li>`;
+            }
+
+            /*for(let c of courses){
+                let liElem = document.createElement("li");
+                let text = document.createTextNode(c);
+                liElem.appendChild(text);
+                listeUl.appendChild(liElem);
+            }*/
+        }
+
+        function supprimer(prod){
+            let pos = courses.indexOf(prod);
+
+            if( pos >= 0 && pos < courses.length ){
+                courses.splice(pos, 1);
+                afficher();
+            }
+        }
+
+        function supprimerTout(){
+            courses = [];
+            afficher();
+        }
+
+        
+        ajouter("Chocolat");
+        ajouter("Biscuit");
+        ajouter("Sel");
+        supprimer("Sel");
+   //     supprimerTout();
+
+    </script>
+
+</body>
+</html>

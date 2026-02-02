@@ -1,0 +1,50 @@
+    <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercice DOM</title>
+  <style>
+    .important {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Bienvenue</h1>
+
+  <p class="description">Ceci est un texte de démonstration.</p>
+
+  <ul id="list">
+    <li>HTML</li>
+    <li>CSS</li>
+  </ul>
+
+  <div id="container"></div>
+
+  <script>
+    // récupération des éléments du DOM
+    let h1 = document.getElementById("title"); // 1 seul élément
+    let p = document.getElementsByClassName("description"); // une collection []
+    let ul = document.getElementById("list"); // 1 seul élément
+    let div = document.getElementById("container") // 1 seul élément
+
+    h1.innerText = "Formation JavaScript - DOM";
+    p[0].innerText = "Nouveau texte pour le paragraphe !";
+
+    p[0].classList.add("important");
+    h1.style.color = "blue";
+
+    let li = document.createElement("li");
+    li.textContent = "JavaScript";
+    ul.appendChild(li);
+    // ul.innerHTML += "<li>JavaScipt</li>";
+
+    div.innerHTML = "<p>Le DOM permet de modifier une page HTML avec JavaScript.</p>"
+    
+    document.querySelector("ul li").remove(); // supprimer le 1er li
+
+  </script>
+</body>
+</html>

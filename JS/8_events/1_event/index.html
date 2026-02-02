@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercice JS – Événement</title>
+  <style>
+    .rectangle{
+      width: 300px;
+      height: 200px;
+      background-color: royalblue;
+      border-radius: 10px;
+      transition: background-color .7s;
+    }
+
+    .rectangle.important.good{background-color: limegreen;}
+    .rectangle.important{background-color: firebrick;}
+    .hidden{display: none;}
+  </style>
+</head>
+<body>
+
+  <h1>Gestion de la Souris</h1>
+
+  <button id="toggle-rectangle">Cacher / Afficher le rectangle</button>
+
+  <p>
+    Quand on clique sur le bouton toggle-rectangle, cela cache ou affiche le rectangle.
+  </p> 
+  <p>
+      Quand la souris se déplace à l'intérieur du rectangle il devient rouge; il reprend sa couleur originale quand la souris n'est plus dedans.
+  </p>  
+  <p>Quand on double-clique sur le rectangle il devient vert.</p>
+
+  <div class="rectangle"></div>
+
+  <script>    
+    // Les variables
+    let btn = document.getElementById("toggle-rectangle");
+    let rectangle = document.querySelector(".rectangle");
+
+
+    // Les fonctions
+    function toggleBtn(){
+      // toggle ajouter / supprimer la class hidden (tel un intérupteur)
+      rectangle.classList.toggle("hidden");
+    }
+
+    function onMouseEnter(){
+      rectangle.classList.add("important");
+    }
+
+    function onMouseLeave(){
+      rectangle.classList.remove("important");      
+      rectangle.classList.remove("good");      
+    }
+
+    function onDblClick(){
+      rectangle.classList.add("good");
+    }
+
+
+    // code principal
+    btn.addEventListener("click", toggleBtn);
+    rectangle.addEventListener("mouseenter", onMouseEnter);
+    rectangle.addEventListener("mouseleave", onMouseLeave);
+    rectangle.addEventListener("dblclick", onDblClick);
+
+  </script>
+</body>
+</html>

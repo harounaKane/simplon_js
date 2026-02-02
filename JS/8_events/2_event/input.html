@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Manip input</h1>
+
+    <p>nombres <input type="text" id="nombre" value="10 5 2 12 7" /></p>
+    
+    <p>
+        somme : <span id="somme"></span>
+    </p><p>
+        Moyenne : <span id="moyenne"></span>
+    </p>
+    <p><button id="btn">Somme</button></p>
+    <p><button id="btnMoyenne">Moyenne</button></p>
+
+
+    <script>
+
+        alert("toto");
+        if(confirm("Voulez-vous quitter ?")){
+            alert("Oui quitter");
+        }else{
+            alert("Non rester")
+        }
+
+        let nombre = document.getElementById("nombre");
+        let btn = document.getElementById("btn");
+        let somme = document.getElementById("somme");
+
+        let tab;
+
+        btn.addEventListener("click", function(){
+            let inputValut = nombre.value; // 10 5 4
+            let valeurCourente = "";
+            let sommeValeur = 0;
+
+            for(let str of inputValut){
+
+                if( str != " " ){
+                    valeurCourente += str;
+                }else{ // si espace
+                    sommeValeur += Number( valeurCourente );
+                    valeurCourente = "";
+                }                
+            }
+            
+            if( valeurCourente != " " ){
+                sommeValeur += Number( valeurCourente );
+            }
+                
+            somme.textContent = sommeValeur;
+
+           // somme.textContent = sommeNombre();
+        });
+
+        document.getElementById("btnMoyenne").addEventListener("click", function(){
+            let moyenne = sommeNombre() / tab.length;
+            document.getElementById("moyenne").textContent = moyenne;
+        });
+
+        function sommeNombre(){
+            tab = nombre.value.split(" ");
+            let s = 0;
+
+            for( let sum of tab ){
+                s += Number(sum);
+            }
+
+            return s;
+        }
+
+    </script>
+
+</body>
+</html>

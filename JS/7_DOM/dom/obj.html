@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>DOM</h1>
+        <img src="" alt="">
+        <a href="">Lien 1</a>
+        <a href="">Lien 2</a>
+    </header>
+    <main>
+        <section>
+            <h2>Section 1</h2>
+            <p>
+                Lorem ipsum, <span>DOM</span> dolor sit amet consectetur adipisicing elit. Dignissimos facere harum similique cum consectetur atque distinctio pariatur in nisi dolor.
+            </p>
+            <button>Voir plus</button>
+        </section>
+        <section>
+            <h2>Section 1</h2>
+            <article>
+                Lorem ipsum, <span>DOM</span> dolor sit amet consectetur adipisicing elit. Dignissimos facere harum similique cum consectetur atque distinctio pariatur in nisi dolor.
+            </article>
+            <article>
+                Lorem ipsum, <span>DOM</span> dolor sit amet consectetur adipisicing elit. Dignissimos facere harum similique cum consectetur atque distinctio pariatur in nisi dolor.
+            </article>
+            <button>Voir plus</button>
+        </section>
+    </main>
+    <footer>
+        &copy; - Simplon - 2026
+    </footer>
+
+    <script>
+        let etudiant = {
+            prenom: "Loan",
+            age: 20,
+            adresse: {
+                rue: "rue de l'école",
+                ville: "Aix"
+            },
+            langages: ["html", "css", "js", "python", "java"],
+            info: function(){
+                let str = this.prenom +"\n" + this.langages.join();
+                
+                return str;
+            }
+        };
+
+        console.log(etudiant);
+
+        let commandes = [
+            {
+                libelle: "Lait",
+                prix: 45,
+                qte: 5
+            },
+            {
+                libelle: "Beurre",
+                prix: 35.9,
+                qte: 1
+            }
+        ];
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Poids</h1>
+
+    <p>
+        <label for="">Taille</label>
+        <input type="number" id="taille">
+    </p>
+     <p>
+        <label for="">Âge</label>
+        <input type="number" id="age">
+    </p>
+     <p>
+        <label for="">Sexe</label>
+        <input type="text" id="sexe" value="homme">
+    </p>
+
+    <button id="btn">Calculer</button>
+
+    <p id="res"></p>
+
+    <script>
+        let t = document.getElementById("taille");
+        let a = document.getElementById("age");
+        let s = document.getElementById("sexe");
+        let btn = document.getElementById("btn");
+        let result = document.getElementById("res");
+
+        btn.addEventListener("click", function(){
+            let res;
+            let tValue = Number(t.value);
+            let aValue = Number(a.value);
+            let sValue = s.value;
+
+            
+            if(sValue == "homme"){ 
+                res = (3*tValue-250)*(aValue+270)/1200 
+            }else if( sValue == "femme"){
+                res = (tValue/2 -30 )*(180+aValue)/200
+            }
+
+            result.innerText = 
+            `Le poids pour ${sValue} de ${aValue} ans de taille ${tValue} cm : ${res.toFixed(2)} KG`;
+
+         
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercice DOM – Tableau</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 60%;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+    }
+    .highlight {
+      background-color: #8b7575;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Informations utilisateurs</h1>
+
+  <table id="users-table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Âge</th>
+        <th>Ville</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Les lignes seront ajoutées en JavaScript -->
+    </tbody>
+  </table>
+
+  <p id="summary"></p>
+
+  <script>
+    let users = [
+            { nom: "Ali", age: 25, ville: "Aix-en-Provence" },
+            { nom: "Fatou", age: 30, ville: "Marseille" },
+            { nom: "Mehdi", age: 17, ville: "Nice" }
+        ];
+
+    let titre = document.getElementById("title");
+    let tbody = document.querySelector("#users-table tbody");
+    let sommaire = document.getElementById("summary");
+
+    let totalMineur = 0;
+
+    titre.textContent = "Liste des utilisateurs (chargée dynamiquement)";
+    titre.style.backgroundColor = "blue";
+    titre.style.padding = "10px";
+    titre.style.color = "white";
+
+
+    // fonction affichage données tableau
+    function afficher(){
+        tbody.textContent = "";
+        totalMineur = 0;
+
+        users.forEach((user) => {
+            // créer uneligne <tr>
+            let tr = creerElement("tr");
+            tr.title = "Utilisateur: " + user.nom;
+
+            // ajout des <td> dans le <tr> - créer les <td>
+            tr.appendChild( creerElement("td", user.nom ) ); // tr.appendChild(tdNom)
+            tr.appendChild( creerElement("td", user.age ) );
+            tr.appendChild( creerElement("td", user.ville.toUpperCase() ) );
+
+            // color si age < 18
+            if( user.age < 18 ){
+                tr.classList.add("highlight");
+                totalMineur++;
+            }
+            
+            tbody.appendChild(tr);
+        });
+    }
+
+    // fonction supprimant ville de "Nice"
+    function supprimerNice(){
+        return users.filter(user => user.ville != "Nice");
+    }
+
+    // fonction pour créer un élément 
+    function creerElement(elem, data = ""){
+        let tag = document.createElement(elem);
+        tag.textContent = data;
+
+        return tag;
+    }
+
+    afficher();
+    users = supprimerNice();
+    afficher();
+
+    // sommaire : créatiion <div> & ajout dans l'élément parent sommaire
+    sommaire.appendChild( creerElement("div", "Total  : " + users.length) )
+    sommaire.appendChild( creerElement("div", "Majeur : " + (users.length - totalMineur)) )
+    sommaire.appendChild( creerElement("div", "Mineur : " + totalMineur) );
+
+  </script>
+</body>
+</html>

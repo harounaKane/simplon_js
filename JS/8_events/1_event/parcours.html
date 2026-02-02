@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercice JS - Tableau & Click</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    button { padding: 10px 15px; }
+    p { font-size: 18px; }
+  </style>
+</head>
+<body>
+
+  <h1>Affichage du tableau</h1>
+
+
+
+  <button id="forward">▶️</button>
+  <span id="result">Clique sur le bouton</span>
+  <button id="backward">◀️</button>
+
+  <script>
+    const tab = [10, 20, 30, 40, 50];
+
+    let result = document.getElementById("result");
+    let btn = document.getElementById("forward");
+    let back = document.getElementById("backward");
+    let idx = 0;
+
+    btn.addEventListener("click", function(){
+        if(idx < tab.length ){
+            result.innerText = tab[idx];
+            idx++;
+        }else{
+            alert("Fin de la liste");
+        }
+    });
+
+    back.addEventListener("click", function(){
+        
+        if( idx >= 1  ){
+          idx--;
+          result.innerText = tab[idx];
+        }else{
+            alert("Fin de la liste");
+        }
+    });
+
+
+  </script>
+</body>
+</html>

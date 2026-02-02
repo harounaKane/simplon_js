@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+}
+
+header, footer{
+    background-color: rgb(87, 108, 120);
+    padding: 10px;
+    text-align: center;
+}
+
+section{
+    background-color: rgb(85, 106, 61);
+    margin: 15px 0;
+    padding: 10px;
+}
+
+button{
+    background-color: blue;
+    padding: 7px;
+    color: white;
+}
+
+article{
+    display: inline-block;
+    width: 48%;
+    margin: 2px;
+}
+
+.lien{
+    color: white;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+#titre{
+    background-color: azure;
+}
+
+.h2{
+    background-color: red;
+    padding: 10px;
+}

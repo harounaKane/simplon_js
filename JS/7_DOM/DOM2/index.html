@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exo DOM – Cartes Produits</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    #grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .card { border: 1px solid #333; border-radius: 8px; padding: 12px; }
+    .badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
+    .badge.ok { background: #e6ffe6; }
+    .badge.low { background: #fff3cd; }
+    .price { font-weight: bold; margin-top: 8px; }
+    .muted { color: #777; font-style: italic; }
+  </style>
+</head>
+<body>
+
+    <h1 id="title">Catalogue</h1>
+
+    <div id="grid"></div>
+
+    <p id="summary" class="muted"></p>
+
+    <script>
+
+        const produits = [
+            { id: 1, name: "Clavier", price: 39.99, stock: 12, category: "Informatique" },
+            { id: 2, name: "Souris", price: 19.99, stock: 3, category: "Informatique" },
+            { id: 3, name: "Casque", price: 59.90, stock: 0, category: "Audio" },
+            { id: 4, name: "Écran", price: 149.00, stock: 7, category: "Informatique" },
+            { id: 5, name: "Enceinte", price: 89.50, stock: 2, category: "Audio" }
+        ];
+
+        let total = 0;
+        let totalRupture = 0;
+        let somme = 0;
+        let prixMoyen = 0;
+
+        let summary = document.getElementById('summary');
+        let grid = document.getElementById("grid");
+
+        document.getElementById("title").textContent =  "Catalogue produits (rendu DOM)";
+        document.getElementById("title").title = "Page générée en JavaScript";
+
+
+        function createElement(typeElem,  data = ""){
+            let elem = document.createElement(typeElem);
+            elem.textContent = data;
+
+            return elem;
+        }
+
+        function rendu(){
+            produits.forEach(prod => {
+                let div = createElement("div");
+                div.classList.add("card");
+                div.setAttribute("data-id", prod.id);
+                div.setAttribute("data-categorie", prod.category);
+
+                let h2 = createElement("h2", prod.name);
+                let p = createElement("p", `Catégorie: ${prod.category}`);
+                let span = createElement("span", "en stock");
+                span.classList.add( "badge", "ok" );
+                let p2 = createElement("p", `Prix: ${prod.price} €`);
+                p2.classList.add("price");
+
+                if( prod.price >= 100 ){
+                    p2.style.color = 'red';
+                }
+
+                div.appendChild( h2 );
+                div.appendChild( p );
+                div.appendChild( span );
+                div.appendChild( p2 );
+
+                grid.appendChild( div );
+
+                stock(prod, span);                
+            });
+        }
+
+        function stock(produit, span){
+            let qt = produit.stock;
+
+            if( qt > 0 && qt <= 3  ){
+                span.textContent = produit.stock + " - Stock faible";
+                span.classList.add("low");
+            }else if( qt === 0 ){
+                span.textContent = produit.stock + " - Rupture";
+                span.classList.add("low");
+            }else if( qt > 0 ){
+                span.textContent = produit.stock + " - En Stock";
+                span.classList.add("ok");
+            }
+        }
+
+        
+        function resume(){
+            summary.textContent = `Total : ${total} | Rupture : ${totalRupture} | Prix moyen : ${prixMoyen.toFixed(2)} €`;
+        }
+
+        function updateDom(){
+            let cards = document.querySelectorAll(".card");
+
+            cards.forEach(c => {
+                let id = c.dataset.id;
+
+                if( c.dataset.categorie == "Audio" ){
+                    c.remove();
+                }else{
+                    let prod = produits.find(p => (p.id == id && p.category == c.dataset.categorie) );
+
+                    if( prod.stock == 0 ) totalRupture++;
+    
+                    somme += prod.price;
+                    total++;
+                    // if( total === 0 ){prixMoyen = 0;}else{prixMoyen = somme / total;}
+                    prixMoyen = (total === 0) ? 0 : somme / total;
+                }
+            });
+            
+            resume();
+        }
+
+        // APPEL DE FONCTIONS
+        rendu();
+        updateDom();
+    
+    </script>
+</body>
+</html>
