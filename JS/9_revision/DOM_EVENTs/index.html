@@ -10,11 +10,11 @@
 <body class="container-fluid">
     <h1>Suivi des interactions sur des boutons</h1>
     
-    <button id="toto">Bouton 1</button>
-    <button>Bouton 2</button>
-    <button>Bouton 3</button>
-    <button id="tata">Bouton 4</button>
-    <button>Bouton 5</button>
+    <button id="1">Bouton 1</button>
+    <button id="2">Bouton 2</button>
+    <button id="3">Bouton 3</button>
+    <button id="4">Bouton 4</button>
+    <button id="5">Bouton 5</button>
     
     <h4>Résumé</h4>
     <ul id="resume"></ul>
@@ -22,21 +22,32 @@
     <script>
         let buttons = document.querySelectorAll("button");
 
-        buttons.forEach(btn => {
-            btn.addEventListener("click", function(){
-                resumeUpdate();
+        // stockage des clicks & over
+        let stat = {};
 
+        buttons.forEach(btn => {
+            // créer un objet pour chaque BTN qui contient comme attribut : click & over
+            stat[btn.id] = {click: 0, over: 0}
+
+            btn.addEventListener("click", function(){
+                stat[btn.id].click++; // incrémente le click du btn courant
+                resumeUpdate();
             });
 
+            btn.addEventListener("mouseenter", function(){
+                stat[btn.id].over++; // incrémente le over du btn courant
+                resumeUpdate();
+            });
 
         });
 
         function resumeUpdate(){
+            // reset du 'ul'
             document.getElementById("resume").textContent = "";
 
             for(let i=1; i<=buttons.length; i++ ){
                 let li = document.createElement("li");
-                li.textContent = `Bouton ${i} ➡️ Click: 0, Over: 0`;
+                li.textContent = `Bouton ${i} ➡️ Click: ${stat[i].click}, Over: ${stat[i].over}`;
 
                 document.getElementById("resume").appendChild(li);
             }
