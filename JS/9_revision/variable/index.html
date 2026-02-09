@@ -6,8 +6,23 @@
     <title>Document</title>
 </head>
 <body>
+
+    <button id="btn1" class="btn" data-id="bouton 1">btn 1</button>
+    <button id="btn2" class="btn" data-id="bouton 2">btn 2</button>
+    <button id="btn3" class="btn" data-id="bouton 3">btn 3</button>
+    <button id="btn4" class="btn" data-id="bouton 4">btn 4</button>
+
     
 
-    <script src="script.js"></script>
+    <script>
+        let btns = document.querySelectorAll("button");
+
+        btns.forEach(btn => {
+            btn.addEventListener("click", function(){
+                console.log(this.dataset.id)
+            })
+        })
+
+    </script>
 </body>
 </html>

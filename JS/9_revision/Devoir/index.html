@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #liste{
+            margin: 10px;
+        }
+
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste de course</h1>
+
+    <div id="liste"></div>
+    <div id="hide" class="hide">
+        <div>Total <span id="total">0</span> €</div>
+        <div>Moyenne: <span id="moyenne">0</span> €</div>
+        <p>
+            <button id="vider">Vider</button>
+        </p>
+    </div>
+
+    <p>
+        <input type="text" id="nom" placeholder="Libellé article">
+        <input type="text" id="prix" placeholder="Prix article">
+        <input type="submit" id="btnAjouter">
+    </p>
+
+
+    <script>
+
+        /*****************************************************
+        ******************** DONNEES ***********************
+        ******************************************************/
+        let produits = [];
+
+        let liste = byId("liste");
+        let total = byId("total");
+        let moyenne = byId("moyenne");
+        let nomInput = byId("nom");
+        let prixInput = byId("prix");
+        let btnAjouter = byId("btnAjouter");
+
+         /*****************************************************
+        ******************** CODE PRINCIPAL********************
+        ******************************************************/
+
+        btnAjouter.addEventListener("click", function(){
+            let libelle = nomInput.value;
+            let prix = Number( prixInput.value );
+
+            if( isNaN(prix) || libelle.trim() == "" ){
+                alert("saisie incorrecte");
+                return;
+            }
+
+            ajouter(libelle, prix);
+            afficher();
+
+            nomInput.value = "";
+            prixInput.value = "";
+        });
+
+
+        byId("vider").addEventListener("click", function(){
+            produits = [];
+            afficher();
+        });
+
+
+        /*****************************************************
+        ******************** FONCTIONS ***********************
+        ******************************************************/
+
+        function somme(){
+            let total = 0;
+
+            for(let prod of produits){
+                total += prod.prix;
+            }
+
+            return total.toFixed(2);
+        }
+
+        function moyennePrix(){
+            if( produits.length <= 0 ) return 0;
+
+            return (somme() / produits.length).toFixed(2);
+        }
+
+        function afficher(){
+            liste.innerHTML = "";
+
+            for(let prod of produits){
+                liste.innerHTML += 
+                `<div>${prod.nom} | ${prod.prix} <button class="supprimer" data-nom="${prod.nom}">X</button></div>`;
+            }
+
+            if( byId('hide').classList.contains('hide') ){
+                byId('hide').classList.remove("hide");
+            }else{
+                byId('hide').classList.add("hide");
+            }           
+
+            byId("total").innerText = somme();
+            byId("moyenne").innerText = moyennePrix();
+
+            document.querySelectorAll(".supprimer").forEach(btn => {
+                btn.addEventListener("click", function(){
+                    let libelle = btn.dataset.nom;
+                    supprimer(libelle);
+                });
+            });
+        }
+
+        function supprimer(libelle){
+            
+           /* for(let i=0; i<produits.length; i++){
+                if( libelle == produits[i].nom ){
+                    produits.splice(i, 1);
+                }
+            }*/
+
+            let t = produits.filter(prod => prod.nom != libelle);
+            produits = t;
+            
+            afficher();
+        }
+
+        function ajouter(nom, prix){
+            produits.push({nom, prix}); // {nom: nom, prix: prix}
+        }
+
+        function byId(id){
+            return document.getElementById(id);
+        }
+        
+    </script>
+
+</body>
+</html>

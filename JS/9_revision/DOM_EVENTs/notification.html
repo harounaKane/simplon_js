@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #notif{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Notification + Annulation + Compte à rebours</h1>
+
+    <button id="save">Sauvegarder</button>
+    <button id="cancel" disabled>Annuler</button>
+
+    <p id="notif">Sauvegarde effectuée (disparition dans <span>5</span>s)</p>
+
+    <ul id="history">
+    </ul>
+
+    <script>
+        let btnSave = document.getElementById("save");
+        let btnCancel = document.getElementById("cancel");
+        let notification = document.getElementById("notif");
+        let notifSpan = document.querySelector("#notif span");
+        let history = document.getElementById("history");
+
+        let compteur = 5;
+        let setIntervalId = null;
+
+
+        btnSave.addEventListener("click", function(){
+
+            if( setIntervalId != null ){
+
+                afficher('Timer réinitialisé');
+                clearInterval(setIntervalId);
+                setIntervalId = null;
+            }
+
+            notification.style.display = "block";
+
+            btnCancel.disabled = false;
+            compteur = 5;
+
+            setIntervalId = setInterval(function(){
+                notifSpan.textContent = compteur;
+                compteur--;
+   
+                if( compteur < 0 ){
+                    notification.style.display = "none";
+                    clearInterval(setIntervalId);
+                    setIntervalId = null;
+                    btnCancel.disabled = true;
+
+                    afficher('Notification disparue automatiquement');
+                }
+
+            }, 1000);
+        });
+
+        btnCancel.addEventListener("click", function(){
+
+            if( notification.style.display == "block" ){
+                btnCancel.disabled = true;
+                notification.style.display = "none";
+            }
+
+            clearInterval(setIntervalId);
+            setIntervalId = null;
+
+            afficher('Notification annulée par l’utilisateur');
+        });
+
+        function afficher(msg){
+            let li = document.createElement("li");
+            li.textContent = msg;
+
+            history.appendChild(li);
+        }
+
+    </script>
+    
+</body>
+</html>
