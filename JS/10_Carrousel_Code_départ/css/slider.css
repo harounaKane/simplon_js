@@ -1,0 +1,68 @@
+ header{
+    background-color: gray;
+    padding: 15px;
+    text-align: center;
+ }
+
+ .toolbar{
+    margin: 15px 0;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid green;
+    border-radius: 5px;
+ }
+
+ .toolbar:hover{
+    background-color: green;
+    color: white;
+ }
+
+ #toolbar-toggle{
+    border-bottom: 5px solid silver;
+    padding-bottom: 15px;
+    margin: 0 420px;
+    border-radius: 30px;
+ }
+
+ #toolbar-toggle, .slider{
+    text-align: center;
+ }
+
+ img{
+    max-width: 100%;
+ }
+
+ .slider{
+    width: 350px;
+    height: 350px;
+    margin: 10px auto;
+ }
+
+ .slider img{
+    border-radius: 15px;
+    padding: 5px;
+    background-color: silver;
+    transform: rotate(-3deg);
+    margin: 10px 0;
+ }
+
+ .hide{
+    display: none;
+ }
+
+ #points{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 100px;
+ }
+
+ .point{
+    color: rgb(212, 219, 225);
+    cursor: pointer;
+ }
+
+ .active{
+    color: rgb(15, 16, 17) !important;
+ }
+

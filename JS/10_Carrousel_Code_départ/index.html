@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/slider.css">
+    <title>Carrousel</title>
+</head>
+<body>
+    
+    <header>
+        <h1>Explorez notre galerie d'inspiration</h1>
+    </header>
+
+    <button class="toolbar">Afficher/masquer <i class="fa-solid fa-arrow-up"></i></button>
+
+    <div id="toolbar-toggle" class="hide">
+        <button id="slider-previous"><i class="fa-solid fa-backward"></i></button>
+        <button id="slider-toggle"><i class="fa-solid fa-play"></i></button>
+        <button id="slider-next"><i class="fa-solid fa-forward"></i></button>
+        <button id="slider-random"><i class="fa-solid fa-random"></i></button>
+    </div>
+
+    <div id="points"></div>
+
+    <figure id="slider" class="slider">
+        <img src="images/1.jpg" alt="titre">
+        <figcaption>légende de l'image</figcaption>
+    </figure>
+
+    <script src="js/slider.js"></script>
+
+</body>
+</html>

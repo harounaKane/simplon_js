@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Fontion simple <em>vs</em> arrow fonction </h1>
+
+    <button>bouton 1</button>
+    <button>bouton 2</button>
+    <button id="toto">bouton 3</button>
+
+
+    <script>
+
+        let btns = document.querySelectorAll("button");
+        const TOUCHE_A = 65;
+
+        for(let i = 0; i < btns.length; i++){
+            /*btns[i].addEventListener('click', function(){
+                console.log( this )
+            });*/
+
+            btns[i].addEventListener('click', (e) => {
+                console.log( e )
+            });
+        }
+        
+
+        document.addEventListener('keyup', (e) => {
+                if( e.keyCode == TOUCHE_A ){
+                    console.log( "A" )
+                }
+            });
+
+    </script>
+
+</body>
+</html>
