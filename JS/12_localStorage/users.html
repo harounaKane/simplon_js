@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Accueil</title>
+</head>
+<body>
+
+    <header class="bg-secondary d-flex align-items-center justify-content-between pe-5">
+        <a href="."><img src="img/logo.png" alt="logo" class="img-fluid w-75"></a>
+        <nav>
+            <a href="index.html" class="text-light mx-2">Accueil</a>
+            <a href="inscription.html" class="text-light mx-2">Inscription</a>
+            <a href="connexion.html" class="text-light mx-2">Connexion</a>
+            <a href="users.html" class="text-light mx-2">Users</a>
+        </nav>
+    </header>
+
+    <main class="container-fluid p-4">
+        <h1>Liste des inscriptions</h1>
+
+        <table class="table table-striped table-hover">
+            <tr class="table-dark">
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="user"></tbody>
+        </table>
+    </main>
+    
+    <footer class="bg-secondary p-4 mt-5 text-light">
+        <em>Auth Starter</em> : &copy; 2026 - Mention - Contact
+    </footer>
+
+    <script src="js/localStorage.js"></script>
+    <script>
+
+        let user = document.getElementById("user");
+        
+
+        function afficher(){
+            let tabUsers = read("user");
+
+            tabUsers.forEach( (u, i) => {
+                let tr = 
+                `<tr>
+                        <td> ${u.prenom} </td>
+                        <td> ${u.nom} </td>
+                        <td> ${u.email} </td>
+                        <td> 
+                            <a href="inscription.html?id=${i}" class="update btn btn-success">
+                                <i class="fa-solid fa-pen"></i> 
+                            </a>
+                            | 
+                            <button class="delete btn btn-danger">
+                                <i class="fa-solid fa-trash" id="${i}"></i> 
+                            </button>
+                        </td>
+                </tr>`;
+
+                user.innerHTML += tr;
+            });
+
+            let btnDelete = document.querySelectorAll(".delete");
+
+            btnDelete.forEach(btn => btn.addEventListener("click", (e) => {
+                const idDelete = e.target.id;
+                
+                tabUsers.splice(idDelete, 1);
+
+                save("user", tabUsers);
+
+                window.location.reload();
+
+            }));
+        }
+
+        afficher();
+
+
+
+    </script>
+    
+</body>
+</html>

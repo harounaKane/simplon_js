@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Formulaire de sondage sportif</h1>
+
+    <form action="" novalidate>
+        <label for="nom">Nom</label>
+        <input type="text" id="nom">
+        <div id="errNom" class="erreur"></div>
+
+        <label for="">E-mail</label>
+        <input type="email" id="email">
+        <div id="errMail" class="erreur"></div>
+
+        <label for="">Niveau sportif</label>
+        <select name="" id="niveau">
+            <option value="">--- Selectionnez un niveau ---</option>
+            <option value="Débutant">Débutant</option>
+            <option value="Intermédiaire">Intermédiaire</option>
+            <option value="Avancé">Avancé</option>
+        </select>
+        <div id="errNiveau" class="erreur"></div>
+
+        <fieldset>
+            <legend>Vos sports préférés</legend>
+            <div>
+                <input type="checkbox" value="musculation" name="sports">
+                <label for="">Musculation</label>
+            </div>
+
+            <div>
+                <input type="checkbox" value="Yoga" name="sports">
+                <label for="">Yoga</label>
+            </div>
+
+            <div>
+                <input type="checkbox" value="Course" name="sports">
+                <label for="">Course</label>
+            </div>
+
+            <div>
+                <input type="checkbox" value="Natation" name="sports">
+                <label for="">Musculation</label>
+            </div>
+            
+            <div id="errSports" class="erreur"></div>
+        </fieldset>
+
+        <label for="">Commentaire</label>
+        <textarea name="comment" id="comment" rows="5"></textarea>
+
+        <p><input type="submit" value="Valider"></p>
+
+    </form>
+
+    <div id="progression"> <div class="progression"></div> </div>
+
+    <div id="msg">
+    </div>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>

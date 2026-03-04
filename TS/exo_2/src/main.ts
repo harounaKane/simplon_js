@@ -1,0 +1,60 @@
+interface Livre {
+    titre: string,
+    auteur: string,
+    disponible: boolean
+};
+
+let monLivre: Livre = {
+    titre: "Titre livre",
+    auteur: "John",
+    disponible: true
+};
+
+// let livres:Array<Livre> = []
+let livres:Livre[] = [
+    monLivre,
+    {titre: "livre 2", auteur: "auteur 2", disponible: true},
+    {titre: "livre 3", auteur: "auteur 3", disponible: true},
+    {titre: "livre 4", auteur: "auteur 4", disponible: false},
+    {titre: "livre 5", auteur: "auteur 5", disponible: true}
+];
+
+function afficherCatalogue(catalogue: Livre[] ):void{
+    catalogue.forEach(livre => afficherLivre(livre));
+}
+
+function afficherLivre(livre: Livre): void{
+    console.log(
+        `titre: ${livre.titre}
+        auteur: ${livre.auteur}
+        disponibilité: ${livre.disponible ? "OUI": "NON"}`
+    );
+}
+
+function livresDispo(catalogue: Livre[]): Livre[]{
+    return catalogue
+            .filter(l => l.disponible)
+            .map(l => ({...l}));
+}
+
+function addLivre(catalogue: Livre[], livre: Livre): void{
+    catalogue.push(livre);
+}
+
+function emprunter(catalogue: Livre[], titre: string){
+    let livre:Livre | undefined = catalogue.find(l => l.titre == titre);
+    
+    if( !livre ) throw new Error("Pas de livre avec ce titre !");
+    if( !livre.disponible ) throw new Error("ce livre n'est pas dispo !");
+
+    livre.disponible = false;
+}
+
+function retouner(catalogue: Livre[], titre: string){
+    let livre:Livre|undefined = catalogue.find(l => l.titre == titre);
+    
+    if( !livre ) throw new Error("Pas de livre avec ce titre !");
+    if( livre.disponible ) throw new Error("ce livre est déjà dans le stock dispo !");
+
+    livre.disponible = true;
+}

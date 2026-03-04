@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        #users{
+            border-right: 5px solid black;
+            height: 100vh;
+        }
+        .user{
+            background-color: #1213ddad;
+            margin-top: 10px;
+            padding: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user:hover, .post:hover{
+            background-color: aqua;
+        }
+
+        .selected{background-color: burlywood;}
+
+        .post{
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+
+    <header class="p-3 mb-3 bg-secondary">
+        <h1>API Placeholder</h1>
+    </header>
+
+    <main class="container-fluid row">
+        <div class="col-2" id="users"></div>
+        <div class="col-10" id="posts"></div>
+    </main>
+    
+    <script>
+
+        let users = document.getElementById("users");
+        let posts = document.getElementById("posts");
+        let usersDiv = document.querySelectorAll("#users div");
+
+        const API = "https://jsonplaceholder.typicode.com/";
+
+        users.innerHTML = "<h2>Utilisateurs</h2>";
+        posts.innerHTML = "<h2>Clique sur un Utilisateurs pour afficher ses postes</h2>";
+
+        async function getUsers(){
+            try{
+                const res = await fetch(`${API}users`);
+
+                if( !res.ok ) throw new Error("Erreur " + res.status);
+
+                const data = await res.json();
+
+                data.forEach(u => {
+                    let div = document.createElement("div");
+                    div.classList.add("user");
+                    div.innerHTML = u.name;
+
+                    div.addEventListener("click", () => {
+                        usersDiv.forEach(divs => divs.classList.remove("selected"));
+
+                        div.classList.add("selected");
+                        getPost(u);
+                    }); 
+
+                    users.appendChild(div)
+                });
+            }catch(err){
+                console.log(err);
+            }
+
+        }
+
+        async function getPost(user){
+            try{
+                const res = await fetch(`${API}posts?userId=${user.id}`);
+
+                if( !res.ok ) throw new Error("Erreur " + res.status);
+
+                const userPosts = await res.json();
+
+                posts.innerHTML = `<h2>${user.name}</h2>`;
+                
+                userPosts.forEach(post => {
+                    let div = document.createElement("div");
+                    div.className = "post";
+                    div.innerHTML = `<h3>${post.title}</h3>`;
+                    div.innerHTML += `<p>${post.body}</p>`;
+
+                    div.addEventListener('click', () => {
+                        getPostComments(user, post);
+                    });
+
+                    posts.appendChild(div);
+                });
+            }catch(err){
+                console.log(err);
+            }
+        }
+
+        async function getPostComments(user, post){
+            try{
+                const res = await fetch(`${API}comments?postId=${post.id}`);
+
+                if( !res.ok ) throw new Error("Erreur " + res.status);
+
+                const postComments = await res.json();
+
+                posts.innerHTML = `<h2>${user.name}</h2>`;
+                posts.innerHTML += `<h3>${post.title}</h3>`;
+
+                postComments.forEach(comment => {
+                    let div = document.createElement("div");
+                    div.className = "post";
+                    div.innerHTML = `<h3>${comment.name}</h3>`;
+                    div.innerHTML += `<p>${comment.body}</p>`;
+
+                    posts.appendChild(div);
+                });
+
+            }catch(err){
+                console.log(err);
+            }
+        }
+
+        getUsers();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="./assets/styles/styles.css">
+
+    <title>E-commerce</title>
+</head>
+<body>
+    <header class="bg-secondary p-4 mb-3">
+        <h1>E-commerce</h1>
+        <nav>
+            <a href="./src/views/logon.html" class="btn btn-success">Logon</a>
+            <a href="" class="btn btn-success">Login</a>
+
+            <a href="" class="btn btn-success">Add Prod</a>
+            <a href="" class="btn btn-success">Commande</a>
+
+            <a href=""><i class="fa-solid fa-cart-arrow-down"></i></a>
+        </nav>
+    </header>
+
+    <main class="container-fluid">
+        <section>
+            <h3>User</h3>
+            <div class="d-flex">
+                <form action="">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control"  placeholder="name@example.com" id="name" >
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" placeholder="name@example.com" id="login" >
+                        <label for="login">Login</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control"  placeholder="Password" id="mdp" >
+                        <label for="mdp">Password</label>
+                    </div>
+                    <div class="alert-danger my-3" id="err"></div>
+                    <input class="btn btn-success mt-3" type="submit">
+                </form>
+                <div class="border border-2 mx-2 p-3" id="user">
+                    
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="prods">
+            <h3>Product</h3>
+            <div class="d-flex">
+                <form action="">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control"  placeholder="name@example.com" id="nameProd" >
+                        <label for="nameProd">Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" placeholder="name@example.com" id="price" >
+                        <label for="price">Price</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" placeholder="name@example.com" id="stock" value="0">
+                        <label for="stock">Stock</label>
+                    </div>
+                    <div class="alert-danger my-3" id="errProd"></div>
+                    <input class="btn btn-success mt-3" type="submit">
+                </form>
+                <div class="row border border-2 mx-2 p-3" id="products">
+                    <div class="card clo-3 m-1" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Souris sans fil</h5>
+                            <p class="card-text">10.5€</p>
+
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control text-center" value="1">
+                                <button class="btn btn-outline-secondary" type="button">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+        <section id="cart">
+            <h3>Panier</h3>
+            <div class="d-flex">
+                <div class="border border-2 mx-2 p-3" id="carts">
+                    <div id="cartEmpty" class="empty">Panier vide.</div>
+
+                        <div class="items" >
+                            <h4 class="m-0">Souris </h4>
+                            <div> 10.5 € X 2 =  <span>21€</span> </div>
+                            <button class="btns" data-action="dec">-</button>
+                            <input class="qty w-25 text-center" type="number" min="1" value="1"/>
+                            <button class="btns" data-action="inc">+</button>
+                            <button class="btn btn-danger" data-action="remove">Supprimer</button>
+                        </div>
+
+                        <div class="totals">
+                            <div>Total articles : <span id="cartCount">0</span></div>
+                            <div>Total : <span id="cartTotal">0</span> €</div>
+                        </div>
+
+                        <div class="ligne">
+                            <button class="col-5 btn btn-danger" id="cartClear">Vider le panier</button>
+                            <button class="col-5 mx-1 btn btn-primary" id="checkout">Commander</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section id="order">
+            <h3>Commandes</h3>
+            <div class="d-flex">
+                <div class="border border-2 mx-2 p-3" id="orders">
+                    Pas de commande
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="p-3 bg-secondary mt-5">
+        &copy; - E-commerce - 2026
+    </footer>
+    
+    <script type="module" src="./src/app.js"></script>
+</body>
+</html>

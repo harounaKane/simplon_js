@@ -1,0 +1,50 @@
+*{box-sizing: border-box;}
+
+body{
+    background-color: rgb(131, 170, 170)
+}
+
+form, .task-card{
+    background-color: rgb(253, 254, 255);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+/* JS */
+.task-card{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 10px;
+    font-weight: bold;
+}
+
+.task-card span{
+    font-style: italic;
+}
+
+.btn-update:hover, .btn-delet:hover{
+    background-color: rgba(0, 0, 0, 0.172);
+}
+
+.btn-update, .btn-delet{
+    transition: background-color 0.5s;
+}
+
+#msg{
+    display: none;
+    position: absolute;
+    background-color: rgba(22, 24, 24, 0.652);
+    padding: 47px;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+    width: 90%;
+    bottom: 150px;
+    right: 68px;
+    border-radius: 15px;
+}
+
+.over{
+    background-color: rgba(0, 0, 255, 0.317);
+}

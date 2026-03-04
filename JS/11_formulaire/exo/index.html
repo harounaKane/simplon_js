@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="traitement.html" novalidate>
+
+        <div>
+            <label for="login">Login</label>
+            <input type="text" id="login" name="login" required minlength="2">
+            <div class="erreur" id="errLogin"></div>
+        </div>
+
+        <div id="mdp">
+            <div>
+                <label for="">Pass</label>
+                <input type="password" name="mdp" id="pass">
+                <div class="erreur"></div>
+            </div>
+            <div>
+                <label for="">Confirmation</label>
+                <input type="password" name="confirm" id="confirm">
+            </div>
+        </div>
+        <fieldset>
+            <legend>Sexe</legend>
+            <input type="radio" name="sexe" value="femme" id="femme">
+            <label for="femme">Femme</label>
+            <input type="radio" name="sexe" value="homme" id="homme">
+            <label for="homme">Homme</label>
+        </fieldset>
+
+        <input type="submit">
+    </form>
+    
+    <script src="script.js"></script>
+</body>
+</html>

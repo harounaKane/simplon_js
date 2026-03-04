@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Accueil</title>
+</head>
+<body>
+
+    <header class="bg-secondary d-flex align-items-center justify-content-between pe-5">
+        <a href="."><img src="img/logo.png" alt="logo" class="img-fluid w-75"></a>
+        <nav>
+            <a href="index.html" class="text-light mx-2">Accueil</a>
+            <a href="inscription.html" class="text-light mx-2">Inscription</a>
+            <a href="connexion.html" class="text-light mx-2">Connexion</a>
+            <a href="users.html" class="text-light mx-2">Users</a>
+        </nav>
+    </header>
+
+    <main class="container-fluid p-4">
+        <h1>Inscription</h1>
+
+        <form action="" novalidate>
+            <div class="mb-3">
+                <label for="">Prénom</label>
+                <input type="text" class="form-control" name="prenom" required minlength="2" id="prenom">
+            </div>
+            <div class="mb-3">
+                <label for="">Nom</label>
+                <input type="text" class="form-control" name="nom" required minlength="2" id="nom">
+            </div>
+            <div class="mb-3">
+                <label for="">Email</label>
+                <input type="email" class="form-control" name="email" required id="email">
+            </div>
+            <div class="mb-3">
+                <label for="">Mot de passe</label>
+                <input type="password" class="form-control" name="mdp" required minlength="4">
+            </div>            
+            <div class="mb-3">
+                <input type="checkbox" class="form-check-input" name="condition" value="oui">
+                <label for="">J'accepte les conditions</label>
+            </div>
+            <input type="submit" class="btn btn-outline-success">
+        </form>
+
+    </main>
+
+    <footer class="bg-secondary p-4 mt-5 text-light">
+        <em>Auth Starter</em> : &copy; 2026 - Mention - Contact
+    </footer>
+
+    <script src="js/localStorage.js"></script>
+    <script>
+
+        let params = new URLSearchParams(window.location.search);
+        let idEdite = params.get('id');
+
+        let form = document.querySelector("form");
+        let champs = document.querySelectorAll('input[required]');
+        let tabUsers = [];
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            let bool = true;
+
+            champs.forEach(champ => {
+                reset(champ);
+                if(!valide( champ )){
+                    bool = false;
+                }
+            });
+
+            if( bool ){
+                // envoie formulaire : e.target.submit();
+
+               const formData = new FormData(form);
+               const user = {
+                    prenom: formData.get("prenom"),
+                    nom: formData.get("nom"),
+                    email: formData.get("email"),
+                    mdp: formData.get("mdp"),
+                };
+
+                tabUsers = read("user");
+
+                if( idEdite ){
+                    tabUsers[idEdite] = user;
+                }else{
+                    tabUsers.push(user);
+                }
+
+                save("user", tabUsers);
+
+               window.location.href = "users.html";
+            }
+        });
+
+        function reset(champ){
+            if(champ.nextElementSibling)
+                champ.nextElementSibling.remove();
+        }
+
+        function valide(champ){
+            if( champ.checkValidity() ) 
+                return true;
+
+            let div = document.createElement("div");
+            div.classList.add("alert", "alert-danger", "p-0", "mt-2");
+            div.innerHTML = champ.validationMessage;
+            champ.after(div);
+            return false;        
+        }
+
+        function edituser(){
+            if( idEdite ){
+                tabUsers = read("user");
+
+                const user = tabUsers[idEdite];
+
+                document.getElementById("prenom").value = user.prenom;
+                document.getElementById("nom").value = user.nom;
+                document.getElementById("email").value = user.email;
+
+                document.querySelector("input[type='submit']").value = "Mettre à jour"
+            }
+        }
+
+        edituser()
+
+    </script>
+    
+</body>
+</html>

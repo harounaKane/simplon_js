@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        #dropHere{
+            border: 1px dashed black;
+            margin-top: 20px;
+            padding: 30px;
+        }
+        .dropHere{
+            background-color: rgba(127, 187, 255, 0.294);
+        }
+    </style>
+</head>
+<body>
+    <main class="container-fluid">
+        <!-- Button trigger modal -->
+       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button>
+        <h1>Compte Bancaire</h1>
+
+        <table class="table table-striped my-4">
+            <tr class="table-dark">
+                <th>Numéro</th>
+                <th>Titulaire</th>
+                <th>Solde</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="liste"></tbody>
+        </table>
+
+        <form action="">
+            <label for="">Solde</label>
+            <input type="text" name="solde" value="20" id="solde">
+            <label for="">Titulaire</label>
+            <input type="text" name="titulaire" id="titulaire">
+            <input type="submit">
+        </form>
+
+        <div id="dropHere" class=""></div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <label for="">Titre</label>
+                        <input type="text">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <script src="Compte.js"></script>
+    <script src="Manager.js"></script>
+
+    <script>
+
+        const manager = new Manager();
+        let comptes = [];
+
+        const form = document.querySelector("form");
+        const dropHere = document.getElementById("dropHere");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const solde = Number( document.getElementById("solde").value );
+            const titulaire = document.getElementById("titulaire").value;
+
+            let compte = new Compte({solde, titulaire});
+
+            manager.ajouter(compte);
+
+            render();
+            
+        });
+         
+        
+        function render(){
+            let liste = document.getElementById("liste");
+            liste.innerHTML = "";
+            
+            comptes = manager.lireComptes();
+            
+            comptes.forEach((compte, idx) => {
+                let tr = createElem("tr");
+                tr.draggable = true;
+                tr.id = "tr"+idx;
+                let tdn = createElem("td", compte.numero);
+                let tdt = createElem("td", compte.titulaire);
+                let tds = createElem("td", compte.solde);
+                let tda = createElem("td");
+                tda.innerHTML = `V | X | U`;
+                
+                tr.appendChild(tdn);
+                tr.appendChild(tdt);
+                tr.appendChild(tds);
+                tr.appendChild(tda);
+                
+                liste.appendChild(tr);
+
+                tr.addEventListener("dragstart", (e) => {
+                    e.dataTransfer.setData("text/plain", tr.id);
+                });
+
+                dropHere.addEventListener("dragover", (e) => {
+                    e.preventDefault();
+                    dropHere.className = "dropHere";
+                });
+
+                dropHere.addEventListener("drop", e => {
+                    let id = e.dataTransfer.getData("text/plain");
+                    let elem = document.getElementById(id);
+                    
+                    if(elem)
+                        dropHere.appendChild(elem)
+                });
+
+
+                dropHere.addEventListener("dragleave", e => {
+                    e.preventDefault();
+                    dropHere.classList.remove("dropHere");
+                });
+
+            });
+        }
+        
+        function createElem(el, value = ""){
+            const element = document.createElement(el);
+            element.innerHTML = value;
+            return element;
+        }
+        
+        render();
+
+        const d = new Date();
+        const d1 = new Date();
+
+        let df = d.toLocaleDateString("fr");
+
+        console.log( d.toISOString() );
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+
+
+    <header class="bg-light p-4 mb-3">
+        <h1>Gestion des tâches</h1>
+    </header>
+    
+    <main class="container-fluid">
+
+        <form action="" class="mb-4">
+            <input type="hidden" id="id" value="">
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="titre" placeholder="Titre">
+                        <label for="titre">Titre</label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="desc" placeholder="Description"></textarea>
+                        <label for="desc">Description</label>
+                    </div>
+                </div>
+                <div class="col-3 form-floating">
+                    <select class="form-select" id="statut" aria-label="Floating label select example">
+                        <option selected>Choisir un statut</option>
+                        <option value="à faire">A faire</option>
+                        <option value="en cours">En cours</option>
+                        <option value="terminée">Terminée</option>
+                        <option value="bloquée">Bloquée</option>
+                    </select>
+                    <label for="statut">Choisir un statut</label>
+                </div>
+                <div class="col-3">
+                    <input type="submit" class="btn btn-primary mt-2">
+                </div>
+            </div>
+            <div id="err"></div>
+        </form>
+        <div class="row">
+            <div class="col-2 form-floating">
+                <select class="form-select" id="statutFilter">
+                    <option value="toutes">Toutes</option>
+                    <option value="à faire">A faire</option>
+                    <option value="en cours">En cours</option>
+                    <option value="terminée">Terminée</option>
+                    <option value="bloquée">Bloquée</option>
+                </select>
+            </div>
+            <div class="form-floating mb-3 col-3">
+                <input type="text" class="form-control" id="texte" placeholder="Rechercher tâche">
+                <label for="texte">Rechercher tâche</label>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-primary p-3" id="etatTache">Aucune tâche</button>
+            </div>
+        </div>
+
+        <div class="row" id="task">
+            <!--
+            <div class="col-3 task-card">
+                <h3>Titre [à faire] </h3>
+                <div>
+                    Description de la tache
+                </div>
+                <div>
+                    Crée le 20/02/2026
+                </div>
+                <button>Modifier</button>
+                <button class="btn-delet">Supprimer</button>
+            </div>
+            -->
+        </div>
+
+        <div id="msg"></div>
+    </main>
+    
+
+</body>
+</html>

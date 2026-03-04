@@ -1,0 +1,30 @@
+body{
+    padding: 10px;
+}
+
+label{
+    display: block;
+}
+
+#login{
+    display: block;
+    width: 100%;
+}
+
+#mdp{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+fieldset label{
+    display: inline;
+}
+
+input[type="submit"]{
+    margin-top: 20px;
+}
+
+.erreur{
+    color: red;
+}

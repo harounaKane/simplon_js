@@ -1,0 +1,60 @@
+*{
+    box-sizing: border-box;
+}
+
+label{
+    display: block;
+    margin-top: 20px;
+}
+
+fieldset label{
+    display: inline;
+}
+
+fieldset{
+    margin-top: 20px;
+}
+
+input[type="text"], input[type="email"], select, textarea{
+    width: 100%;
+}
+
+form, #progression{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.input_erreur{
+    border: 2px solid red;
+}
+
+.erreur{
+    color: red;
+}
+
+#msg{
+    background-color: rgb(204, 227, 171);
+    border-left: 10px solid green;
+    padding: 7px;
+    opacity: 0;
+}
+
+#msg.recap{
+    opacity: 1;
+}
+
+#progression{
+    background-color: aliceblue;
+    border: 2px solid wheat;
+    border-radius: 10px;
+}
+
+.progression{
+    width: 0;
+    background-color: rgb(11, 11, 221);
+    border: 2px solid wheat;
+    border-radius: 10px;
+    padding: 10px;
+    transition: width 0.6s;
+    opacity: 0.01;
+}
