@@ -12,9 +12,10 @@ export class Livre{
     }
 
     generateId(){
-        let r = Math.ceil( Math.random() * 1000 + 1000 );
+        let r = Math.ceil( Math.random() * 100000000 + 100000000 );
 
-        return new Date().getTime() +"_"+r;
+
+        return r;
     }
 
     rendreIndisponible(){

@@ -1,5 +1,7 @@
 import { Bibliotheque } from "./Bibliotheque.js";
 import { Emprunt } from "./Emprunt.js";
+import { Livre } from "./Livre.js";
+import { LivreManager } from "./LivreManger.js";
 
 let qs = s => document.querySelector(s);
 
@@ -9,6 +11,11 @@ let emprunt_books = qs("#emprunt_books");
 
 let b1 = new Bibliotheque("b1");    
 let b2 = new Bibliotheque("b2");
+
+if(b1.livreManager.livres.length == 0){
+    creerLivre();
+}
+
 
 let bolckB1 = qs("#b1-books");
 let bolckB2 = qs("#b2-books");
@@ -153,49 +160,44 @@ function refresh(){
 
 refresh();
 
-/*
-
-import { Bibliotheque } from "./Bibliotheque.js";
-import { Livre } from "./Livre.js";
-import { LivreManager } from "./LivreManger.js";
-
-
-try{
-    let ob = {titre: "Une si longur lettre", auteur: "Mariama Ba"};
-    let ob2 = {titre: "Oui Commandant", auteur: "Hampaté Ba"};
-    let ob3 = {titre: "Afrique à coeur", auteur: "Macky Sall"};
-    let ob4 = {titre: "La gouvernante", auteur: "Joy Fielding"};
-    let ob5 = {titre: "L'enfant noir", auteur: "Camara Laye"};
+// si pas de livre, la fonction est appelé à la ligne : 16
+function creerLivre(){
+    try{
+        let ob = {titre: "Une si longur lettre", auteur: "Mariama Ba"};
+        let ob2 = {titre: "Oui Commandant", auteur: "Hampaté Ba"};
+        let ob3 = {titre: "Afrique à coeur", auteur: "Macky Sall"};
+        let ob4 = {titre: "La gouvernante", auteur: "Joy Fielding"};
+        let ob5 = {titre: "L'enfant noir", auteur: "Camara Laye"};
 
 
-    let b = new Bibliotheque("b1");
-    b.addLivre(new Livre(ob));
-    b.addLivre(new Livre(ob2));
-    b.addLivre(new Livre(ob3));
-    b.addLivre(new Livre(ob4));
-    b.addLivre(new Livre(ob5));
+        let b = new Bibliotheque("b1");
+        b.addLivre(new Livre(ob));
+        b.addLivre(new Livre(ob2));
+        b.addLivre(new Livre(ob3));
+        b.addLivre(new Livre(ob4));
+        b.addLivre(new Livre(ob5));
 
 
 
-    let ob12 = {titre: "A coeur ouvert", auteur: "Monique Mazars"};
-    let ob22 = {titre: "Initiation JS", auteur: "Loan"};
-    let ob32 = {titre: "Expert Python", auteur: "Chemseddine"};
-    let ob42 = {titre: "Professeur Java", auteur: "Zakkaria"};
-    let ob52 = {titre: "Petit pays", auteur: "Gael Faye"};
+        let ob12 = {titre: "A coeur ouvert", auteur: "Monique Mazars"};
+        let ob22 = {titre: "Initiation JS", auteur: "Loan"};
+        let ob32 = {titre: "Expert Python", auteur: "Chemseddine"};
+        let ob42 = {titre: "Professeur Java", auteur: "Zakkaria"};
+        let ob52 = {titre: "Petit pays", auteur: "Gael Faye"};
 
 
-    let b2 = new Bibliotheque("b2");
-    b2.addLivre(new Livre(ob12));
-    b2.addLivre(new Livre(ob22));
-    b2.addLivre(new Livre(ob32));
-    b2.addLivre(new Livre(ob42));
-    b2.addLivre(new Livre(ob52));
+        let b2 = new Bibliotheque("b2");
+        b2.addLivre(new Livre(ob12));
+        b2.addLivre(new Livre(ob22));
+        b2.addLivre(new Livre(ob32));
+        b2.addLivre(new Livre(ob42));
+        b2.addLivre(new Livre(ob52));
 
 
 
 
 
-}catch(e){
-    console.log(e.message);
+    }catch(e){
+        console.log(e.message);
+    }
 }
-    */
