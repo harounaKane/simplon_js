@@ -4,7 +4,7 @@ import { TaskManager } from "./services/TaskManager.js";
 
 // const qs = <T>(sel: string): T => document.querySelector(sel) as T;
 
-function qs <T>(sel: string):T{
+function qs <T extends HTMLElement>(sel: string):T{
     const el = document.querySelector(sel);
     if( !el ) throw new Error("Un élément HTML non trouvé !");
 
