@@ -2,8 +2,8 @@ import { Identifiant } from "../interface/Identifiant.js";
 
 export class Task implements Identifiant{
     _id: number;
-    private _title: string; 
-    private _completed: boolean;
+    protected _title: string; 
+    protected _completed: boolean;
 
     constructor(id: number, title: string, completed: boolean){
         this._id = id;
@@ -13,6 +13,24 @@ export class Task implements Identifiant{
 
     toggle(){
         this._completed = !this._completed;
+    }
+
+    getLabel(): string{
+        return this._completed 
+                ? `☑ ${this._title}` 
+                : `☐ ${this._title}` ;
+    }
+
+    toJson(){
+        return {
+            id: this._id,
+            title: this._title,
+            completed: this._completed
+        }
+    }
+
+    static fromJson(data: any): Task{
+        return new Task(data.id, data.title, data.completed);
     }
 
     get id(){return this._id;}

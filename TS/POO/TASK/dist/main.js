@@ -31,16 +31,26 @@ btn.addEventListener("click", () => {
     render();
 });
 function render() {
-    let li = document.createElement("li");
+    ul.textContent = "";
     manager.tasks.forEach(task => {
-        if (task instanceof PriorityTask) {
-            li.textContent = `⚠️ ${task.title} (priorité ${task.priority})`;
-        }
-        else {
-            li.textContent = task.title;
-        }
-        //    li.style.textDecoration = "line-through"
-        // li.addEventListener("click")
+        let li = document.createElement("li");
+        li.id = `${task.id}`;
+        li.textContent = task.getLabel();
+        if (task.completed)
+            li.style.textDecoration = "line-through";
+        let color = "";
+        if (task.completed)
+            color = "green";
+        else if (!task.completed && !task.priority)
+            color = "yellow";
+        else if (task.priority)
+            color = "red";
+        li.style.backgroundColor = color;
+        li.addEventListener("click", () => {
+            manager.toggleTask(parseInt(li.id));
+            render();
+        });
+        ul.appendChild(li);
     });
-    ul.appendChild(li);
 }
+render();

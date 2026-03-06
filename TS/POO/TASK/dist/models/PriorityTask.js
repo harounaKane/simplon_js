@@ -5,6 +5,22 @@ export class PriorityTask extends Task {
         super(id, title, completed);
         this.priority = priority;
     }
+    getLabel() {
+        return this._completed
+            ? `☑ ${this._title} (priorité ${this._priority})`
+            : `⚠️ ${this._title} (priorité ${this._priority})`;
+    }
+    toJson() {
+        return {
+            id: this._id,
+            title: this._title,
+            completed: this._completed,
+            priority: this._priority
+        };
+    }
+    static fromJson(task) {
+        return new PriorityTask(task.id, task.title, task.completed, task.priority);
+    }
     get priority() { return this._priority; }
     set priority(priority) {
         if (priority < 1 || priority > 5)

@@ -5,11 +5,12 @@ export class TaskManager{
     private _tasks:Task[];
 
     constructor(){
-        this._tasks = [];
+        this._tasks = this.load();
     }
 
     addTask(task: Task): void{
         this._tasks.push(task);
+        this.save();
     }
 
     toggleTask(idTask: number): void{
@@ -18,15 +19,16 @@ export class TaskManager{
         if( !task ) throw new Error("Pas de task avec cet ID");
 
         task.toggle();
+        this.save();
+        this._tasks = this.load();
     }
 
-    gettask(id: number): Task | null{
+    getTask(id: number): Task | null{
         let task = this._tasks.find(t => t.id == id);
 
         if( task ) return task;
 
         return null;
-
     }
 
     nombreTaskPrio(){
@@ -38,4 +40,14 @@ export class TaskManager{
     }
 
     get tasks(): Task[]{return this._tasks;}
+
+    save(){
+        localStorage.setItem("task", JSON.stringify(this.tasks.map(task => task.toJson())));
+    }
+
+    load(){
+        let dataObj = JSON.parse( localStorage.getItem('task')! ) || [];
+
+        return dataObj.map((t: any) => t.priority ? PriorityTask.fromJson(t) : Task.fromJson(t));
+    }
 }
