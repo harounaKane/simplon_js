@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop",
+    "price": 1200,
+    "description": "Ordinateur portable haute performance",
+    "image": "https://images.pexels.com/photos/18105/pexels-photo.jpg?w=300"
+  },
+  {
+    "id": 2,
+    "name": "Souris",
+    "price": 25,
+    "description": "Souris sans fil ergonomique",
+    "image": "https://images.pexels.com/photos/7974/pexels-photo.jpg?w=300"
+  },
+  {
+    "id": 3,
+    "name": "Clavier",
+    "price": 85,
+    "description": "Clavier mécanique RGB",
+    "image": "https://images.pexels.com/photos/18105/pexels-photo.jpg?w=300"
+  },
+  {
+    "id": 4,
+    "name": "Souris",
+    "price": 25,
+    "description": "Souris sans fil",
+    "image": "https://images.pexels.com/photos/18105/pexels-photo.jpg?w=300"
+  }
+]

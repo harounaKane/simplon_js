@@ -59,5 +59,5 @@ class User<T>{
 
 }
 
-console.log( new User("id_24", "Toto") );
+console.log( new User<string>("id_24", "Toto") );
 console.log( new User(56, "Tata") );

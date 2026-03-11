@@ -1,0 +1,15 @@
+.section {
+  text-align: center;
+  background-color: rgb(147, 108, 57);
+  padding: 25px;
+  margin-top: 10px;
+}
+
+#titre {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bolder;
+}
+
+#prod {
+  font-size: 25px;
+}
