@@ -5,7 +5,7 @@ export default function NavBarre() {
     <>
       <header className="bg-secondary p-3 d-flex align-items-center justify-content-evenly">
         <h1>
-          <Link className="link" to="/">
+          <Link className="link text-white" to="/">
             🛍️ E-SHop
           </Link>
         </h1>
@@ -17,9 +17,9 @@ export default function NavBarre() {
             {" "}
             📦 Products
           </Link>
-          <Link className="link" to="/category">
+          <Link className="link" to="/cart">
             {" "}
-            📦 Category
+            🛒 Cart <span className="text-danger">0</span>
           </Link>
         </nav>
       </header>
