@@ -7,7 +7,7 @@ export const products = [
     category: "electronics",
     image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
     description: "Ordinateur portable haute performance avec processeur M2 Pro",
-    rating: 4.8,
+    rating: 1.8,
     stock: 5,
   },
   {
@@ -27,7 +27,7 @@ export const products = [
     category: "electronics",
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
     description: "Casque sans fil avec réduction de bruit active",
-    rating: 4.7,
+    rating: 2.7,
     stock: 8,
   },
   // Vêtements
@@ -58,7 +58,7 @@ export const products = [
     category: "clothing",
     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
     description: "T-shirt de qualité premium en coton",
-    rating: 4.4,
+    rating: 3.4,
     stock: 25,
   },
   // Livres
@@ -79,7 +79,7 @@ export const products = [
     category: "books",
     image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400",
     description: "Les meilleures pratiques de JavaScript",
-    rating: 4.7,
+    rating: 5,
     stock: 18,
   },
   {

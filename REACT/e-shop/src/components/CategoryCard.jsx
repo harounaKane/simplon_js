@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function CategoryCard({ categorie }) {
-  console.log("categorie");
-
   return (
     <Link className="link" to={`/category/${categorie.id}`}>
       <div className="card p-5">

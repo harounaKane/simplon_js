@@ -12,3 +12,9 @@ nav .link {
   height: 200px;
   width: 300px;
 }
+
+.headerSticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}

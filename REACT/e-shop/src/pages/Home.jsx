@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import { products } from "../data/produits";
 import Products from "./Products";
+import ProductCard from "../components/ProductCard";
 
 export default function Home() {
   const newProds = products.slice(0, 4);
@@ -24,7 +25,12 @@ export default function Home() {
 
       {/* nouveaux produits */}
       <section>
-        <Products products={newProds} />
+        <h2 className="text-center mt-4">📦 Nos nouveaux produits</h2>
+        <div className="d-flex justify-content-around flex-wrap">
+          {newProds.map((prod) => (
+            <ProductCard key={prod.id} product={prod} />
+          ))}
+        </div>
       </section>
     </main>
   );
