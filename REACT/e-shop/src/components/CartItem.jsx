@@ -9,16 +9,20 @@ export default function CartItem({ cartProd, deleteCartProd }) {
 
         <div>
           <h3> {cartProd.product.name} </h3>
-          <div>Prix: {cartProd.product.price}€</div>
+          <div>Prix: {cartProd.product.price.toFixed(2)}€</div>
           <div>Quantité: {cartProd.product.stock}</div>
         </div>
       </div>
-      <div>
-        <button className="btn btn-outline-warning">-</button>{" "}
-        {cartProd.quantite}{" "}
-        <button className="btn btn-outline-success">+</button>
-        <div className="mt-5">
-          <button className="btn btn-outline-danger" onClick={onDeleteProdCart}>
+      <div className="d-flex align-items-center gap-3">
+        <button className="btn btn-success">-</button> {cartProd.quantite}
+        <button className="btn btn-success">+</button>
+        <div> {(cartProd.product.price * cartProd.quantite).toFixed(2)}€ </div>
+        <div>
+          <button
+            title="supprimer"
+            className="btn btn-outline-danger"
+            onClick={onDeleteProdCart}
+          >
             🗑️
           </button>
         </div>

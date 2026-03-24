@@ -26,7 +26,7 @@ export default function Home() {
       {/* nouveaux produits */}
       <section>
         <h2 className="text-center mt-4">📦 Nos nouveaux produits</h2>
-        <div className="d-flex justify-content-around flex-wrap">
+        <div className="d-flex justify-content-between flex-wrap">
           {newProds.map((prod) => (
             <ProductCard key={prod.id} product={prod} />
           ))}

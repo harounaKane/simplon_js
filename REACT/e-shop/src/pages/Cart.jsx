@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import { products } from "../data/produits";
 
@@ -19,17 +20,25 @@ export default function Card({ cartItems, deleteCartProd }) {
     <section className="container mt-5">
       <h2>Mon Panier</h2>
       {cartProducts.map((cartProd) => (
-        <CartItem cartProd={cartProd} deleteCartProd={deleteCartProd} />
+        <CartItem
+          key={cartProd.id}
+          cartProd={cartProd}
+          deleteCartProd={deleteCartProd}
+        />
       ))}
 
       <div className="text-end">
         <h3>Résumé</h3>
         <p>
-          Total: <span>{totalPanier}€</span>{" "}
+          Total: <span>{totalPanier.toFixed(2)}€</span>
         </p>
         <p>Livraison gratuite </p>
 
-        <button>Passer la commande</button>
+        <button className="btn btn-success">
+          <Link to="/checkout" className="link text-white">
+            Passer la commande
+          </Link>
+        </button>
       </div>
     </section>
   );

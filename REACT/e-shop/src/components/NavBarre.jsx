@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function NavBarre({ cart }) {
+export default function NavBarre({ cartItems }) {
   return (
     <>
       <header className="bg-secondary p-3 d-flex align-items-center justify-content-evenly headerSticky">
@@ -19,7 +19,7 @@ export default function NavBarre({ cart }) {
           </Link>
           <Link className="link" to="/cart">
             {" "}
-            🛒 Cart <span className="text-primary"> {cart} </span>
+            🛒 Cart <span className="text-primary"> {cartItems} </span>
           </Link>
         </nav>
       </header>

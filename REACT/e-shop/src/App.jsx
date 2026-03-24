@@ -34,7 +34,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Layout cart={totalPanier}>
+        <Layout cartItems={totalPanier}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />

@@ -5,7 +5,7 @@ export default function Products() {
   return (
     <>
       <h2 className="text-center mt-4">📦 Tous les produits</h2>
-      <div className="d-flex justify-content-around flex-wrap">
+      <div className="d-flex justify-content-between flex-wrap mx-4">
         {products.map((prod) => (
           <ProductCard key={prod.id} product={prod} />
         ))}
