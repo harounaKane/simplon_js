@@ -1,13 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import NavBarre from "./components/NavBarre";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
-import Footer from "./components/Footer";
 import ProdDetail from "./pages/ProdDetail";
 import { useState } from "react";
 import Layout from "./components/Layout";
+import Card from "./pages/Cart";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -26,6 +25,10 @@ function App() {
     }
   };
 
+  const deleteCartProd = (idProduct) => {
+    setCartItems(cartItems.filter((item) => item.id != idProduct));
+  };
+
   const totalPanier = cartItems.reduce((sum, item) => sum + item.quantite, 0);
 
   return (
@@ -38,6 +41,12 @@ function App() {
             <Route
               path="/product/:id/detail"
               element={<ProdDetail addToCart={addToCart} />}
+            />
+            <Route
+              path="/cart"
+              element={
+                <Card cartItems={cartItems} deleteCartProd={deleteCartProd} />
+              }
             />
           </Routes>
         </Layout>
