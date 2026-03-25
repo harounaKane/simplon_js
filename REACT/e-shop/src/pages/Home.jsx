@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import { products } from "../data/produits";
-import Products from "./Products";
 import ProductCard from "../components/ProductCard";
 
 export default function Home() {

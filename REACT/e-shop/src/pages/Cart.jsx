@@ -2,10 +2,21 @@ import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import { products } from "../data/produits";
 
-export default function Card({ cartItems, deleteCartProd }) {
-  if (!cartItems.length)
-    return <section className="container mt-5 h1">Panier vide</section>;
-
+export default function Card({ cartItems, deleteCartProd, updateQty }) {
+  if (!cartItems.length) {
+    return (
+      <>
+        <section className="container mt-5 h1 d-flex justify-content-evenly">
+          <div>Panier vide !</div>
+          <button className="btn btn-outline-secondary">
+            <Link className="link" to="/">
+              Continuer vos achats
+            </Link>
+          </button>
+        </section>
+      </>
+    );
+  }
   const cartProducts = cartItems.map((item) => ({
     ...item,
     product: products.find((prod) => prod.id == item.id),
@@ -24,6 +35,7 @@ export default function Card({ cartItems, deleteCartProd }) {
           key={cartProd.id}
           cartProd={cartProd}
           deleteCartProd={deleteCartProd}
+          updateQty={updateQty}
         />
       ))}
 

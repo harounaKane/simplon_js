@@ -7,9 +7,13 @@ import ProdDetail from "./pages/ProdDetail";
 import { useState } from "react";
 import Layout from "./components/Layout";
 import Card from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([
+    { id: 1, quantite: 2 },
+    { id: 5, quantite: 1 },
+  ]);
 
   const addToCart = (prodId) => {
     const prodExist = cartItems.find((p) => p.id == prodId);
@@ -29,6 +33,20 @@ function App() {
     setCartItems(cartItems.filter((item) => item.id != idProduct));
   };
 
+  const updateQty = (productId, quantite) => {
+    if (quantite <= 0) {
+      deleteCartProd(productId);
+    } else {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id == productId ? { ...item, quantite } : item,
+        ),
+      );
+    }
+  };
+
+  const deleteCart = () => setCartItems([]);
+
   const totalPanier = cartItems.reduce((sum, item) => sum + item.quantite, 0);
 
   return (
@@ -45,8 +63,16 @@ function App() {
             <Route
               path="/cart"
               element={
-                <Card cartItems={cartItems} deleteCartProd={deleteCartProd} />
+                <Card
+                  cartItems={cartItems}
+                  deleteCartProd={deleteCartProd}
+                  updateQty={updateQty}
+                />
               }
+            />
+            <Route
+              path="/checkout"
+              element={<Checkout deleteCart={deleteCart} />}
             />
           </Routes>
         </Layout>

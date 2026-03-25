@@ -1,7 +1,12 @@
-export default function CartItem({ cartProd, deleteCartProd }) {
+export default function CartItem({ cartProd, deleteCartProd, updateQty }) {
   const onDeleteProdCart = () => {
     deleteCartProd(cartProd.id);
   };
+
+  const onUpdateCart = (qte) => {
+    updateQty(cartProd.id, qte);
+  };
+
   return (
     <div className="d-flex p-3 my-3 justify-content-between cartBg">
       <div className="d-flex gap-4">
@@ -14,8 +19,19 @@ export default function CartItem({ cartProd, deleteCartProd }) {
         </div>
       </div>
       <div className="d-flex align-items-center gap-3">
-        <button className="btn btn-success">-</button> {cartProd.quantite}
-        <button className="btn btn-success">+</button>
+        <button
+          className="btn btn-success"
+          onClick={() => onUpdateCart(cartProd.quantite - 1)}
+        >
+          -
+        </button>{" "}
+        {cartProd.quantite}
+        <button
+          className="btn btn-success"
+          onClick={() => onUpdateCart(cartProd.quantite + 1)}
+        >
+          +
+        </button>
         <div> {(cartProd.product.price * cartProd.quantite).toFixed(2)}€ </div>
         <div>
           <button
