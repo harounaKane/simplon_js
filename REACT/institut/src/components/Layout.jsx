@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
-export default function Layout() {
+export default function Layout({ children }) {
   return (
     <div className="containerLayout">
       {/* HEADER */}
@@ -29,7 +29,8 @@ export default function Layout() {
       </header>
 
       {/* MAIN  */}
-      <main>partie principale</main>
+      <main> {children} </main>
+
       {/* FOOTER */}
       <footer className="bg-secondary p-3 mt-4 text-white">
         &copy; Simplon Institut - Aix-Marseille - 2026

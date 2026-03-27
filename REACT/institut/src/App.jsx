@@ -1,14 +1,11 @@
-import { BrowserRouter, Form } from "react-router-dom";
 import "./App.css";
-import Layout from "./components/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
+import AppRoute from "./routes/AppRoute";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
+      <AppRoute />
     </>
   );
 }
