@@ -1,5 +1,9 @@
-img {
+.logo {
   width: 50%;
+}
+
+img {
+  max-width: 100%;
 }
 
 .containerLayout {

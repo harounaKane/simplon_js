@@ -7,7 +7,7 @@ export default function Layout({ children }) {
       {/* HEADER */}
       <header className="bg-secondary px-4 d-flex justify-content-between align-items-center">
         <Link to="/">
-          <img src={logo} alt="LOGO" className="" />
+          <img src={logo} alt="LOGO" className="logo" />
         </Link>
         <nav className="d-flex gap-2 flex-wrap">
           <Link className="btn btn-success" to="/">
