@@ -5,7 +5,7 @@ export default function Layout({ children }) {
   return (
     <div className="containerLayout">
       {/* HEADER */}
-      <header className="bg-secondary px-4 d-flex justify-content-between align-items-center">
+      <header className="bg-secondary px-4 d-flex justify-content-between align-items-center mb-4">
         <Link to="/">
           <img src={logo} alt="LOGO" className="logo" />
         </Link>

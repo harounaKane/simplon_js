@@ -1,7 +1,7 @@
 export default function EtudiantListe({ etudiants }) {
   return (
     <>
-      <table className="table table-striped">
+      <table className="table table-striped table-hover">
         <thead>
           <tr className="table-dark">
             <th>Prénom</th>
@@ -15,8 +15,8 @@ export default function EtudiantListe({ etudiants }) {
               <td>{etudiant.nom}</td>
               <td>{etudiant.telephone}</td>
               <td>
-                <button>✏️</button>
-                <button>X</button>
+                <button className="btn btn-success mx-1">✏️</button>
+                <button className="btn btn-danger">X</button>
               </td>
             </tr>
           ))}
