@@ -21,12 +21,26 @@ class EtudiantService {
     this.etudiants.push(etudiant);
   }
 
+  update(id, data) {
+    const etudiant = this.getById(id);
+
+    if (etudiant) {
+      etudiant.nom = data.nom;
+      etudiant.email = data.email;
+      etudiant.telephone = data.telephone;
+    }
+
+    return etudiant;
+  }
+
   getById(id) {
     return this.etudiants.find((etudiant) => etudiant.id_etudiant == id);
   }
 
   remove(id) {
-    return this.etudiants.filter((etudiant) => etudiant.id_etudiant != id);
+    this.etudiants = this.etudiants.filter(
+      (etudiant) => etudiant.id_etudiant != id,
+    );
   }
 }
 

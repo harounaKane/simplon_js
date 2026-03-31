@@ -1,4 +1,4 @@
-export default function EtudiantListe({ etudiants }) {
+export default function EtudiantListe({ etudiants, onEdit, onDelete }) {
   return (
     <>
       <table className="table table-striped table-hover">
@@ -15,8 +15,22 @@ export default function EtudiantListe({ etudiants }) {
               <td>{etudiant.nom}</td>
               <td>{etudiant.telephone}</td>
               <td>
-                <button className="btn btn-success mx-1">✏️</button>
-                <button className="btn btn-danger">X</button>
+                <button
+                  className="btn btn-success mx-1"
+                  onClick={() => {
+                    onEdit(etudiant);
+                  }}
+                >
+                  ✏️
+                </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    onDelete(etudiant.id_etudiant);
+                  }}
+                >
+                  X
+                </button>
               </td>
             </tr>
           ))}

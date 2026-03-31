@@ -5,13 +5,15 @@ import etudiantService from "../services/EtudiantService";
 
 export default function Etudiant() {
   const [etudiants, setEtudiant] = useState(etudiantService.getAll());
+  const [selectedId, setSelectedId] = useState(null);
   const [formData, setFormData] = useState({
     nom: "",
     email: "",
     telephone: "",
   });
 
-  const add = (e) => {
+  // ajout de new etudiant
+  const handleSubmit = (e) => {
     e.preventDefault();
     const re = /\S+@\S+\.\S+/;
 
@@ -20,10 +22,17 @@ export default function Etudiant() {
       formData.nom.length >= 2 &&
       formData.telephone.length >= 10
     ) {
-      etudiantService.add(formData);
+      if (selectedId == null) {
+        // ajout de l'étudiant au serveur via le service "etudiantService"
+        etudiantService.add(formData);
+      } else {
+        etudiantService.update(selectedId, formData);
+      }
+
+      // mise à jour de l'affichage (re-render)
       setEtudiant([...etudiantService.getAll()]);
-      resetForm();
-    } else console.log("form invalid");
+      resetForm(); // vider les input du formulaire
+    }
   };
 
   const resetForm = () => {
@@ -32,17 +41,39 @@ export default function Etudiant() {
       email: "",
       telephone: "",
     });
+    setSelectedId(null);
   };
 
-  // delete - update - detail - ....
+  const onEdit = (etudiant) => {
+    setSelectedId(etudiant.id_etudiant);
+    setFormData({
+      nom: etudiant.nom,
+      email: etudiant.email,
+      telephone: etudiant.telephone,
+    });
+  };
+
+  const onDelete = (id) => {
+    etudiantService.remove(id);
+    setEtudiant([...etudiantService.getAll()]);
+  };
 
   return (
     <>
       <section className="container">
-        <EtudiantForm formData={formData} setFormData={setFormData} add={add} />
+        <EtudiantForm
+          formData={formData}
+          setFormData={setFormData}
+          handleSubmit={handleSubmit}
+          isEdit={selectedId}
+        />
 
         <h2>🧑‍🎓 Liste des étudiants</h2>
-        <EtudiantListe etudiants={etudiants} />
+        <EtudiantListe
+          etudiants={etudiants}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
       </section>
     </>
   );
