@@ -58,6 +58,12 @@ export default function Etudiant() {
     setEtudiant([...etudiantService.getAll()]);
   };
 
+  const cancel = () => {
+    console.log("cancel");
+
+    resetForm();
+  };
+
   return (
     <>
       <section className="container">
@@ -66,6 +72,7 @@ export default function Etudiant() {
           setFormData={setFormData}
           handleSubmit={handleSubmit}
           isEdit={selectedId}
+          cancel={cancel}
         />
 
         <h2>🧑‍🎓 Liste des étudiants</h2>

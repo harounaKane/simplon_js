@@ -3,6 +3,7 @@ export default function EtudiantForm({
   setFormData,
   handleSubmit,
   isEdit,
+  cancel,
 }) {
   const handleChange = (e) => {
     // const {name, value} = e.target;
@@ -52,7 +53,11 @@ export default function EtudiantForm({
           className="btn btn-success"
           value={isEdit ? "Modifier" : "Ajouter"}
         />
-        {isEdit && <button className="btn btn-danger">Annulet</button>}
+        {isEdit && (
+          <button type="button" className="btn btn-danger" onClick={cancel}>
+            Annulet
+          </button>
+        )}
       </form>
     </>
   );
