@@ -24,7 +24,8 @@ export default function Etudiant() {
     ) {
       if (selectedId == null) {
         // ajout de l'étudiant au serveur via le service "etudiantService"
-        etudiantService.add(formData);
+        const et = etudiantService.createEtudiant(formData);
+        etudiantService.add(et);
       } else {
         etudiantService.update(selectedId, formData);
       }
@@ -85,3 +86,13 @@ export default function Etudiant() {
     </>
   );
 }
+
+// function ajouter(data) {
+//   return new Etudiant(
+//     Date.now(),
+//     data.nom,
+//     data.email,
+//     data.telephone,
+//   );
+
+// }

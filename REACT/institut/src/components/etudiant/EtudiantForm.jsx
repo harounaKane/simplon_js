@@ -13,44 +13,38 @@ export default function EtudiantForm({
   return (
     <>
       <h2>Ajouter un étudiant</h2>
-      <form onSubmit={handleSubmit} action="" className="d-flex gap-3">
-        <div className="mb-3">
-          <label htmlFor="">Nom</label>
-          <input
-            type="text"
-            name="nom"
-            className="form-control"
-            placeholder="nom"
-            value={formData.nom}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder="e-mail"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="">Téléphone</label>
-          <input
-            type="text"
-            name="telephone"
-            className="form-control"
-            placeholder="Téléphone"
-            value={formData.telephone}
-            onChange={handleChange}
-          />
-        </div>
+      <form onSubmit={handleSubmit} className="d-flex gap-2 mb-4 flex-wrap">
+        <input
+          type="text"
+          name="nom"
+          className="form-control"
+          placeholder="nom"
+          value={formData.nom}
+          onChange={handleChange}
+          style={{ maxWidth: "220px" }}
+        />
+        <input
+          type="email"
+          name="email"
+          className="form-control"
+          placeholder="e-mail"
+          value={formData.email}
+          onChange={handleChange}
+          style={{ maxWidth: "220px" }}
+        />
+        <input
+          type="text"
+          name="telephone"
+          className="form-control"
+          placeholder="Téléphone"
+          value={formData.telephone}
+          onChange={handleChange}
+          style={{ maxWidth: "220px" }}
+        />
 
         <input
           type="submit"
-          className="btn btn-success"
+          className={`btn btn-${isEdit ? "warning" : "success"}`}
           value={isEdit ? "Modifier" : "Ajouter"}
         />
         {isEdit && (

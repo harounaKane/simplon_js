@@ -1,9 +1,10 @@
 export default function EtudiantListe({ etudiants, onEdit, onDelete }) {
   return (
     <>
-      <table className="table table-striped table-hover">
+      <table className="table table-bordered table-striped table-hover">
         <thead>
           <tr className="table-dark">
+            <th>ID</th>
             <th>Prénom</th>
             <th>Téléphone</th>
             <th>Action</th>
@@ -12,11 +13,12 @@ export default function EtudiantListe({ etudiants, onEdit, onDelete }) {
         <tbody>
           {etudiants.map((etudiant) => (
             <tr key={etudiant.id_etudiant}>
+              <td>{etudiant.id_etudiant}</td>
               <td>{etudiant.nom}</td>
               <td>{etudiant.telephone}</td>
               <td>
                 <button
-                  className="btn btn-success mx-1"
+                  className="btn btn-warning mx-1"
                   onClick={() => {
                     onEdit(etudiant);
                   }}

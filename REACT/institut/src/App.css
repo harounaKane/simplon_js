@@ -1,9 +1,19 @@
+header {
+  background: linear-gradient(90deg, #198754, #0d6efd);
+}
+
 .logo {
-  width: 50%;
+  width: 20%;
 }
 
 img {
   max-width: 100%;
+}
+
+.hover:hover {
+  background-color: hsla(229, 15%, 41%, 0.385) !important;
+  color: white !important;
+  transition: 0.5s all ease;
 }
 
 .containerLayout {
@@ -14,4 +24,11 @@ img {
 
 main {
   flex: 1;
+}
+
+form {
+  background-color: rgba(164, 155, 143, 0.623);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #6a3b3b;
 }

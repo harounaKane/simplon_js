@@ -1,13 +1,15 @@
 import { etudiantsData } from "../data/FakeData";
-import { Etudiant } from "../model/Etudiant";
+import Etudiant from "../model/Etudiant";
 
 class EtudiantService {
-  constructor() {
-    this.etudiants = etudiantsData;
-  }
+  etudiants = etudiantsData;
 
   getAll() {
     return this.etudiants;
+  }
+
+  getById(id) {
+    return this.etudiants.find((e) => e.id_etudiant === id);
   }
 
   add(data) {
@@ -19,6 +21,7 @@ class EtudiantService {
     );
 
     this.etudiants.push(etudiant);
+    return etudiant;
   }
 
   update(id, data) {
@@ -33,14 +36,8 @@ class EtudiantService {
     return etudiant;
   }
 
-  getById(id) {
-    return this.etudiants.find((etudiant) => etudiant.id_etudiant == id);
-  }
-
-  remove(id) {
-    this.etudiants = this.etudiants.filter(
-      (etudiant) => etudiant.id_etudiant != id,
-    );
+  delete(id) {
+    this.etudiants = this.etudiants.filter((e) => e.id_etudiant !== id);
   }
 }
 
