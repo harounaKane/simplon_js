@@ -11,8 +11,8 @@ export default function CrudTable({ columns, rows, onEdit, onDelete }) {
       </thead>
 
       <tbody>
-        {rows.map((row) => (
-          <tr key={row.id}>
+        {rows.map((row, idx) => (
+          <tr key={idx}>
             {columns.map((col) => (
               <td key={col.key}>{row[col.key]}</td>
             ))}
@@ -25,10 +25,7 @@ export default function CrudTable({ columns, rows, onEdit, onDelete }) {
                 ✏️
               </button>
 
-              <button
-                className="btn btn-danger"
-                onClick={() => onDelete(row.id)}
-              >
+              <button className="btn btn-danger" onClick={() => onDelete(row)}>
                 ❌
               </button>
             </td>

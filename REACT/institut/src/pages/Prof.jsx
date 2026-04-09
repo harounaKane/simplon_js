@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfForm from "../components/prof/ProfForm";
 import CrudTable from "../components/common/CrudTable";
 import profService from "../services/ProfService";
 
 export default function Prof() {
-  const [profs, setProfs] = useState(profService.getAll());
+  const [profs, setProfs] = useState([]);
+
+  useEffect(() => {
+    const load = async () => {
+      const data = await profService.getAll();
+      setProfs(data);
+    };
+    load();
+  }, []);
+
+  const fetchProfs = async () => {
+    const data = await profService.getAll();
+    setProfs(data);
+  };
 
   const [formData, setFormData] = useState({
     nom: "",
@@ -23,26 +36,26 @@ export default function Prof() {
     setSelectedId(null);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.nom.trim()) return;
 
     if (selectedId === null) {
-      profService.add(formData);
+      await profService.add(formData);
     } else {
       profService.update(selectedId, formData);
     }
 
-    setProfs([...profService.getAll()]);
+    await fetchProfs();
     resetForm();
   };
 
-  const handleDelete = (id) => {
-    profService.delete(id);
-    setProfs([...profService.getAll()]);
+  const handleDelete = async (prof) => {
+    await profService.delete(prof.id_prof);
+    await fetchProfs();
 
-    if (selectedId === id) {
+    if (selectedId === prof.id_prof) {
       resetForm();
     }
   };
@@ -70,7 +83,7 @@ export default function Prof() {
 
       <CrudTable
         columns={[
-          { key: "id", label: "ID" },
+          { key: "id_prof", label: "ID" },
           { key: "nom", label: "Nom" },
           { key: "email", label: "Email" },
           { key: "spec", label: "Spécialité" },
