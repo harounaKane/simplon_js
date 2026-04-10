@@ -27,18 +27,18 @@ export default function StageForm({
       />
 
       <input
-        type="date"
-        name="dateDebut"
-        value={formData.dateDebut}
+        type="datetime-local"
+        name="debut"
+        value={formData.debut}
         onChange={handleChange}
         className="form-control"
         style={{ maxWidth: "180px" }}
       />
 
       <input
-        type="date"
-        name="dateFin"
-        value={formData.dateFin}
+        type="datetime-local"
+        name="fin"
+        value={formData.fin}
         onChange={handleChange}
         className="form-control"
         style={{ maxWidth: "180px" }}

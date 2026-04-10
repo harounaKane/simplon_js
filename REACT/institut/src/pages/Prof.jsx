@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProfForm from "../components/prof/ProfForm";
 import CrudTable from "../components/common/CrudTable";
 import profService from "../services/ProfService";
+import ModalErreur from "../components/common/ModalErreur";
 
 export default function Prof() {
   const [profs, setProfs] = useState([]);
@@ -86,22 +87,11 @@ export default function Prof() {
 
   const resetDetail = () => setDetailProf(null);
 
-  if (erreur)
-    return (
-      <div className="alert alert-danger m-4">
-        Erreur : {erreur}
-        <button
-          className="btn btn-sm btn-outline-danger ms-3"
-          onClick={() => setErreur(null)}
-        >
-          Fermer
-        </button>
-      </div>
-    );
-
   return (
     <section className="container mt-4">
       <h2 className="mb-4">Gestion des formateurs</h2>
+
+      <ModalErreur erreur={erreur} setErreur={setErreur} />
 
       <ProfForm
         formData={formData}
@@ -110,6 +100,8 @@ export default function Prof() {
         handleSubmit={handleSubmit}
         handleCancel={resetForm}
       />
+
+      <h2 className="mb-4">🧑‍🏫 Liste des Profs</h2>
 
       {detailProf && (
         <div className="my-5">

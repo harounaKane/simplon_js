@@ -67,7 +67,7 @@ export default function Etudiant() {
 
   return (
     <>
-      <section className="container">
+      <section className="container mt-4">
         <EtudiantForm
           formData={formData}
           setFormData={setFormData}
@@ -76,7 +76,7 @@ export default function Etudiant() {
           cancel={cancel}
         />
 
-        <h2>🧑‍🎓 Liste des étudiants</h2>
+        <h2 className="mb-4">🧑‍🎓 Liste des étudiants</h2>
         <EtudiantListe
           etudiants={etudiants}
           onEdit={onEdit}

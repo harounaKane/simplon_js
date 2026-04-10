@@ -12,7 +12,7 @@ export default function EtudiantForm({
 
   return (
     <>
-      <h2>Ajouter un étudiant</h2>
+      <h2 className="mb-4">Gestion des étudiants</h2>
       <form onSubmit={handleSubmit} className="d-flex gap-2 mb-4 flex-wrap">
         <input
           type="text"

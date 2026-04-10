@@ -1,45 +1,47 @@
 import { stagesData } from "../data/FakeData";
 import Stage from "../model/Stage";
+import api from "./api";
+
+// const formatDate = (dateISO) => dateISO?.split("T") ?? "";
+const formatDate = (dateISO) => {
+  if (!dateISO) return "";
+  const [date, heure] = dateISO.split("T");
+  return `${date} ${heure.replace("Z", "")}`; // "2026-04-08 06:24:11.000"
+};
 
 class StageService {
   stages = stagesData;
 
-  getAll() {
-    return this.stages;
+  async getAll() {
+    const res = await api.get("/stage");
+    return res.data.stages.map((stage) => ({
+      ...stage,
+      debut: formatDate(stage.debut),
+      fin: formatDate(stage.fin),
+    }));
   }
 
-  getById(id) {
-    return this.stages.find((s) => s.id === id);
+  async getById(id) {
+    const res = await api.get(`/stage/${id}`);
+    return {
+      ...res.data,
+      dateDebut: formatDate(res.data.dateDebut),
+      dateFin: formatDate(res.data.dateFin),
+    };
   }
 
-  add(data) {
-    const stage = new Stage(
-      Date.now(),
-      data.nom,
-      data.dateDebut,
-      data.dateFin,
-      data.description,
-      [],
-      [],
-    );
-
-    this.stages.push(stage);
+  async add(data) {
+    const stage = await api.post(`/stage`, data);
     return stage;
   }
 
-  update(id, data) {
-    const stage = this.getById(id);
-    if (stage) {
-      stage.nom = data.nom ?? stage.nom;
-      stage.dateDebut = data.dateDebut ?? stage.dateDebut;
-      stage.dateFin = data.dateFin ?? stage.dateFin;
-      stage.description = data.description ?? stage.description;
-    }
+  async update(id, data) {
+    const stage = await api.put(`/stage/${id}`, data);
     return stage;
   }
 
-  delete(id) {
-    this.stages = this.stages.filter((s) => s.id !== id);
+  async delete(id) {
+    return await api.delete(`/stage/${id}`);
   }
 
   // 🔗 relations

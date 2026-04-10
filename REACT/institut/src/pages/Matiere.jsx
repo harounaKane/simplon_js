@@ -118,6 +118,8 @@ export default function Matiere() {
         handleCancel={resetForm}
       />
 
+      <h2 className="mb-4">👨‍💻 Liste des Matières</h2>
+
       <CrudTable
         columns={[
           { key: "id_matiere", label: "ID" },

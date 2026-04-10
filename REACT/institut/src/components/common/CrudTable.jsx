@@ -1,7 +1,7 @@
 export default function CrudTable({ columns, rows, onEdit, onDelete, detail }) {
   return (
-    <table className="table table-bordered table-striped">
-      <thead>
+    <table className="table table-bordered table-striped table-hover">
+      <thead className="table-dark">
         <tr>
           {columns.map((col) => (
             <th key={col.key}>{col.label}</th>
