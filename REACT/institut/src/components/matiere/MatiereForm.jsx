@@ -56,7 +56,7 @@ export default function MatiereForm({
       >
         <option value="">Choisir un prof</option>
         {profs.map((prof) => (
-          <option key={prof.id} value={prof.id}>
+          <option key={prof.id_prof} value={prof.id_prof}>
             {prof.nom} - {prof.spec}
           </option>
         ))}

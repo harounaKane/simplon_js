@@ -1,43 +1,30 @@
 import { matieresData } from "../data/FakeData";
 import Matiere from "../model/Matiere";
+import api from "./api";
 
 class MatiereService {
   matieres = matieresData;
 
-  getAll() {
-    return this.matieres;
+  async getAll() {
+    return (await api.get("/matiere")).data.matieres;
   }
 
-  getById(id) {
-    return this.matieres.find((m) => m.id === id);
+  async getById(id) {
+    return (await api.get(`/matiere/${id}`)).data;
   }
 
-  add(data) {
-    const matiere = new Matiere(
-      Date.now(),
-      data.nom,
-      data.description,
-      Number(data.duree),
-      Number(data.idProf),
-    );
-
-    this.matieres.push(matiere);
+  async add(data) {
+    const matiere = await api.post("/matiere", data);
     return matiere;
   }
 
-  update(id, data) {
-    const matiere = this.getById(id);
-    if (matiere) {
-      matiere.nom = data.nom ?? matiere.nom;
-      matiere.description = data.description ?? matiere.description;
-      matiere.duree = data.duree ?? matiere.duree;
-      matiere.idProf = data.idProf ?? matiere.idProf;
-    }
-    return matiere;
+  async update(id, data) {
+    const res = await api.put(`/matiere/${id}`, data);
+    return res;
   }
 
-  delete(id) {
-    this.matieres = this.matieres.filter((m) => m.id !== id);
+  async delete(id) {
+    return await api.delete(`/matiere/${id}`);
   }
 
   getByProf(idProf) {

@@ -5,6 +5,14 @@ import profService from "../services/ProfService";
 
 export default function Prof() {
   const [profs, setProfs] = useState([]);
+  const [erreur, setErreur] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+  const [detailProf, setDetailProf] = useState(null);
+  const [formData, setFormData] = useState({
+    nom: "",
+    email: "",
+    spec: "",
+  });
 
   useEffect(() => {
     const load = async () => {
@@ -19,14 +27,6 @@ export default function Prof() {
     setProfs(data);
   };
 
-  const [formData, setFormData] = useState({
-    nom: "",
-    email: "",
-    spec: "",
-  });
-
-  const [selectedId, setSelectedId] = useState(null);
-
   const resetForm = () => {
     setFormData({
       nom: "",
@@ -37,37 +37,67 @@ export default function Prof() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    if (!formData.nom.trim()) return;
+      if (!formData.nom.trim()) return;
 
-    if (selectedId === null) {
-      await profService.add(formData);
-    } else {
-      profService.update(selectedId, formData);
+      if (selectedId === null) {
+        await profService.add(formData);
+      } else {
+        await profService.update(selectedId, formData);
+      }
+
+      await fetchProfs();
+      resetForm();
+      resetDetail();
+    } catch (err) {
+      setErreur(err.response?.data?.erreur || "Erreur lors de la post/put.");
     }
-
-    await fetchProfs();
-    resetForm();
   };
 
   const handleDelete = async (prof) => {
-    await profService.delete(prof.id_prof);
-    await fetchProfs();
+    try {
+      await profService.delete(prof.id_prof);
+      await fetchProfs();
 
-    if (selectedId === prof.id_prof) {
-      resetForm();
+      resetDetail();
+      if (selectedId === prof.id_prof) {
+        resetForm();
+      }
+    } catch (err) {
+      setErreur(err.response?.data?.erreur || "Erreur lors de la suppression.");
     }
   };
 
   const handleEdit = (prof) => {
-    setSelectedId(prof.id);
+    setSelectedId(prof.id_prof);
     setFormData({
       nom: prof.nom,
       email: prof.email,
       spec: prof.spec,
     });
+    resetDetail();
   };
+
+  const detail = async (prof) => {
+    setDetailProf(await profService.getById(prof.id_prof));
+  };
+
+  const resetDetail = () => setDetailProf(null);
+
+  if (erreur)
+    return (
+      <div className="alert alert-danger m-4">
+        Erreur : {erreur}
+        <button
+          className="btn btn-sm btn-outline-danger ms-3"
+          onClick={() => setErreur(null)}
+        >
+          Fermer
+        </button>
+      </div>
+    );
 
   return (
     <section className="container mt-4">
@@ -81,6 +111,24 @@ export default function Prof() {
         handleCancel={resetForm}
       />
 
+      {detailProf && (
+        <div className="my-5">
+          <h3>
+            {" "}
+            {`${detailProf.nom} ${detailProf.matieres.length}`} matière(s)
+          </h3>
+          {detailProf.matieres.length === 0 ? (
+            "Aucune matière"
+          ) : (
+            <ul>
+              {detailProf.matieres.map((mat) => (
+                <li key={mat.id_matiere}>{mat.nom}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
       <CrudTable
         columns={[
           { key: "id_prof", label: "ID" },
@@ -91,6 +139,7 @@ export default function Prof() {
         rows={profs}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        detail={detail}
       />
     </section>
   );

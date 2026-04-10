@@ -1,4 +1,4 @@
-export default function CrudTable({ columns, rows, onEdit, onDelete }) {
+export default function CrudTable({ columns, rows, onEdit, onDelete, detail }) {
   return (
     <table className="table table-bordered table-striped">
       <thead>
@@ -18,8 +18,11 @@ export default function CrudTable({ columns, rows, onEdit, onDelete }) {
             ))}
 
             <td>
+              <button className="btn btn-success" onClick={() => detail(row)}>
+                👁️
+              </button>
               <button
-                className="btn btn-warning me-2"
+                className="btn btn-warning mx-2"
                 onClick={() => onEdit(row)}
               >
                 ✏️

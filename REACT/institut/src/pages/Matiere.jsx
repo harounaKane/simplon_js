@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MatiereForm from "../components/matiere/MatiereForm";
 import CrudTable from "../components/common/CrudTable";
 import matiereService from "../services/MatiereService";
 import profService from "../services/ProfService";
 
 export default function Matiere() {
-  const [matieres, setMatieres] = useState(matiereService.getAll());
-  const [profs] = useState(profService.getAll());
+  const [matieres, setMatieres] = useState([]);
+  const [profs, setProfs] = useState([]);
+  const [erreur, setErreur] = useState(false);
 
   const [formData, setFormData] = useState({
     nom: "",
@@ -16,6 +17,19 @@ export default function Matiere() {
   });
 
   const [selectedId, setSelectedId] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      setMatieres(await matiereService.getAll());
+      setProfs(await profService.getAll());
+    };
+    load();
+  }, []);
+
+  const fetchMatieres = async () => {
+    setMatieres(await matiereService.getAll());
+    setProfs(await profService.getAll());
+  };
 
   const resetForm = () => {
     setFormData({
@@ -27,32 +41,40 @@ export default function Matiere() {
     setSelectedId(null);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
 
-    if (!formData.nom.trim()) return;
+      if (!formData.nom.trim()) return;
 
-    if (selectedId === null) {
-      matiereService.add(formData);
-    } else {
-      matiereService.update(selectedId, formData);
+      if (selectedId === null) {
+        await matiereService.add(formData);
+      } else {
+        await matiereService.update(selectedId, formData);
+      }
+
+      await fetchMatieres();
+      resetForm();
+    } catch (err) {
+      setErreur(err.response?.data?.erreur || "Erreur lors de la post/put.");
     }
-
-    setMatieres([...matiereService.getAll()]);
-    resetForm();
   };
 
-  const handleDelete = (id) => {
-    matiereService.delete(id);
-    setMatieres([...matiereService.getAll()]);
+  const handleDelete = async (matiere) => {
+    try {
+      await matiereService.delete(matiere.id_matiere);
+      await fetchMatieres();
 
-    if (selectedId === id) {
-      resetForm();
+      if (selectedId === matiere.id_matiere) {
+        resetForm();
+      }
+    } catch (err) {
+      setErreur(err.response?.data?.erreur || "Erreur lors de la suppression.");
     }
   };
 
   const handleEdit = (matiere) => {
-    setSelectedId(matiere.id);
+    setSelectedId(matiere.id_matiere);
     setFormData({
       nom: matiere.nom,
       description: matiere.description,
@@ -62,13 +84,26 @@ export default function Matiere() {
   };
 
   const rows = matieres.map((matiere) => {
-    const prof = profs.find((p) => p.id === Number(matiere.idProf));
+    const prof = profs.find((p) => p.id_prof === Number(matiere.idProf));
 
     return {
       ...matiere,
       nomProf: prof ? prof.nom : "Aucun",
     };
   });
+
+  if (erreur)
+    return (
+      <div className="alert alert-danger m-4">
+        Erreur : {erreur}
+        <button
+          className="btn btn-sm btn-outline-danger ms-3"
+          onClick={() => setErreur(null)}
+        >
+          Fermer
+        </button>
+      </div>
+    );
 
   return (
     <section className="container mt-4">
@@ -85,7 +120,7 @@ export default function Matiere() {
 
       <CrudTable
         columns={[
-          { key: "id", label: "ID" },
+          { key: "id_matiere", label: "ID" },
           { key: "nom", label: "Nom" },
           { key: "description", label: "Description" },
           { key: "duree", label: "Durée" },

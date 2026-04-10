@@ -13,8 +13,8 @@ class ProfService {
     return res.data;
   }
 
-  getById(id) {
-    return this.profs.find((p) => p.id === id);
+  async getById(id) {
+    return (await api.get(`/prof/${id}`)).data;
   }
 
   async add(data) {
@@ -25,14 +25,10 @@ class ProfService {
     return res;
   }
 
-  update(id, data) {
-    const prof = this.getById(id);
-    if (prof) {
-      prof.nom = data.nom ?? prof.nom;
-      prof.email = data.email ?? prof.email;
-      prof.spec = data.spec ?? prof.spec;
-    }
-    return prof;
+  async update(id, data) {
+    const res = await api.put(`/prof/${id}`, data);
+
+    return res;
   }
 
   async delete(id) {
