@@ -6,7 +6,7 @@ export const getStages = async (req, res) => {
 
     res.status(200).json({ total: stages.length, stages });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ erreur: error.message });
   }
 };
 
@@ -19,7 +19,7 @@ export const createStage = async (req, res) => {
 
     res.status(200).json(stage);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ erreur: error.message });
   }
 };
 // 2026-04-08 08:24:11

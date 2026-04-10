@@ -11,7 +11,7 @@ export const getProfs = async (req, res) => {
     });
     res.status(200).json(profs);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ erreur: error.message });
   }
 };
 
@@ -28,7 +28,7 @@ export const getProf = async (req, res) => {
 
     res.status(200).json(prof);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ erreur: error.message });
   }
 };
 
@@ -39,7 +39,7 @@ export const createProf = async (req, res) => {
 
     res.status(200).json(newProf);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ erreur: error.message });
   }
 };
 
@@ -47,14 +47,15 @@ export const updateProf = async (req, res) => {
   try {
     const prof = await Prof.findByPk(req.params.id);
 
-    if (!prof) return res.status(404).json({ msg: "Pas de prof avec cet id" });
+    if (!prof)
+      return res.status(404).json({ erreur: "Pas de prof avec cet id" });
 
     const { nom, email, spec } = req.body;
 
     await prof.update({ nom, email, spec });
     res.status(200).json(prof);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ erreur: error.message });
   }
 };
 
@@ -62,12 +63,13 @@ export const delProf = async (req, res) => {
   try {
     const prof = await Prof.findByPk(req.params.id);
 
-    if (!prof) return res.status(404).json({ msg: "pas de prof avec cet id" });
+    if (!prof)
+      return res.status(404).json({ erreur: "pas de prof avec cet id" });
 
     await prof.destroy();
 
-    res.status(200).json({ msg: `Le prof ${prof.nom} est supprimé !` });
+    res.status(200).json({ erreur: `Le prof ${prof.nom} est supprimé !` });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ erreur: error.message });
   }
 };

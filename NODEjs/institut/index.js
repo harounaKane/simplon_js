@@ -4,12 +4,15 @@ import sequelize from "./db.js";
 import profRouter from "./routes/Prof.route.js";
 import matiereRoute from "./routes/Matiere.route.js";
 import stageRouter from "./routes/Stage.route.js";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+app.use(cors()); // en mode DEV
+//app.use(cors({origin: ["https://monsite.fr", "localhost:5173"]})); // en mode PROD
 
 app.use("/prof", profRouter);
 app.use("/matiere", matiereRoute);
