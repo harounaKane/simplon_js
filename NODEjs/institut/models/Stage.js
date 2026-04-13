@@ -15,30 +15,24 @@ const Stage = sequelize.define(
       allowNull: false,
     },
     debut: {
+      // ← "debut" et non "dateDebut"
       type: DataTypes.DATE,
+      allowNull: false,
     },
     fin: {
+      // ← "fin" et non "dateFin"
       type: DataTypes.DATE,
+      allowNull: false,
     },
     description: {
       type: DataTypes.TEXT,
+      allowNull: true,
     },
   },
   {
+    tableName: "stages",
     timestamps: false,
   },
 );
-
-Stage.belongsToMany(Matiere, {
-  through: "stage_matiere",
-  as: "matieres",
-  foreignKey: "stageId",
-});
-
-Matiere.belongsToMany(Stage, {
-  through: "stage_matiere",
-  as: "satges",
-  foreignKey: "matiereId",
-});
 
 export default Stage;
