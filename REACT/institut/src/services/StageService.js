@@ -22,11 +22,13 @@ class StageService {
 
   async getById(id) {
     const res = await api.get(`/stage/${id}`);
-    return {
-      ...res.data,
-      dateDebut: formatDate(res.data.dateDebut),
-      dateFin: formatDate(res.data.dateFin),
-    };
+    return res.data;
+
+    // return {
+    //   ...res.data,
+    //   dateDebut: formatDate(res.data.debut),
+    //   dateFin: formatDate(res.data.fin),
+    // };
   }
 
   async add(data) {
@@ -53,7 +55,6 @@ class StageService {
   }
 
   async ajouterMatiere(idStage, idMatiere) {
-    console.log("ajouterMatiere appelé :", idStage, idMatiere); // ← log
     const res = await api.post(`/stage/${idStage}/matieres`, {
       matiereId: [idMatiere],
     });

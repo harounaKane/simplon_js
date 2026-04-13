@@ -1,5 +1,4 @@
 import { matieresData } from "../data/FakeData";
-import Matiere from "../model/Matiere";
 import api from "./api";
 
 class MatiereService {
