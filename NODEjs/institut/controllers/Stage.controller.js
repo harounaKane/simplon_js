@@ -6,8 +6,8 @@ export const getStages = async (req, res) => {
   try {
     const stages = await Stage.findAll({
       include: [
-        { model: Matiere, as: "matieres" }, // ← manquait
-        { model: Etudiant, as: "etudiants" }, // ← manquait
+        { model: Matiere, as: "matieres" },
+        { model: Etudiant, as: "etudiants" },
       ],
     });
 
@@ -21,8 +21,8 @@ export const getStage = async (req, res) => {
   try {
     const stage = await Stage.findByPk(req.params.id, {
       include: [
-        { model: Matiere, as: "matieres" }, // ← manquait
-        { model: Etudiant, as: "etudiants" }, // ← manquait
+        { model: Matiere, as: "matieres" },
+        { model: Etudiant, as: "etudiants" },
       ],
     });
 
@@ -86,7 +86,7 @@ export const addMatiere = async (req, res) => {
   res.json({ message: "Matière ajoutée." });
 };
 
-// ─── POST inscrire des étudiants à un stage ───────────────────────────────────
+// POST inscrire des étudiants à un stage
 export const inscrireEtudiant = async (req, res) => {
   try {
     const stage = await Stage.findByPk(req.params.id);
@@ -110,14 +110,16 @@ export const inscrireEtudiant = async (req, res) => {
   }
 };
 
-// ─── DELETE retirer un étudiant d'un stage ────────────────────────────────────
+//  DELETE retirer un étudiant d'un stage
 export const deleteEtudiant = async (req, res) => {
+  console.log(req.params.etudiantId);
+
   try {
-    const stage = await Stage.findByPk(req.params.id);
+    const stage = await Stage.findByPk(req.params.etudiantId);
     if (!stage)
       return res
         .status(404)
-        .json({ erreur: `Stage ${req.params.id} introuvable.` });
+        .json({ erreur: `Stage ${req.params.etudiantId} introuvable.` });
 
     await stage.removeEtudiant(req.params.etudiantId);
     res.json({ message: "Etudiant retiré du stage avec succès." });

@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db.js";
-import Matiere from "./Matiere.js";
 
 const Stage = sequelize.define(
   "Stage",
@@ -15,12 +14,10 @@ const Stage = sequelize.define(
       allowNull: false,
     },
     debut: {
-      // ← "debut" et non "dateDebut"
       type: DataTypes.DATE,
       allowNull: false,
     },
     fin: {
-      // ← "fin" et non "dateFin"
       type: DataTypes.DATE,
       allowNull: false,
     },

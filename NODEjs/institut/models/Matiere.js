@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db.js";
-import Prof from "./Prof.js";
 
 const Matiere = sequelize.define(
   "Matiere",
