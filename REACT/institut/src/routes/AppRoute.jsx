@@ -5,6 +5,7 @@ import Prof from "../pages/Prof";
 import Matiere from "../pages/Matiere";
 import Layout from "../components/Layout";
 import Home from "../pages/Home";
+import StageDetail from "../pages/StageDetail";
 
 export default function AppRoute() {
   return (
@@ -16,6 +17,7 @@ export default function AppRoute() {
           <Route path="/etudiant" element={<Etudiant />} />
           <Route path="/prof" element={<Prof />} />
           <Route path="/matiere" element={<Matiere />} />
+          <Route path="/stage/:id" element={<StageDetail />} />
         </Routes>
       </Layout>
     </BrowserRouter>

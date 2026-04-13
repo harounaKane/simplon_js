@@ -1,98 +1,110 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EtudiantForm from "../components/etudiant/EtudiantForm";
 import EtudiantListe from "../components/etudiant/EtudiantListe";
+import ModalErreur from "../components/common/ModalErreur";
 import etudiantService from "../services/EtudiantService";
 
 export default function Etudiant() {
-  const [etudiants, setEtudiant] = useState(etudiantService.getAll());
+  const [etudiants, setEtudiants] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
+  const [erreur, setErreur] = useState(null);
   const [formData, setFormData] = useState({
     nom: "",
     email: "",
     telephone: "",
   });
 
-  // ajout de new etudiant
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const re = /\S+@\S+\.\S+/;
-
-    if (
-      re.test(formData.email) &&
-      formData.nom.length >= 2 &&
-      formData.telephone.length >= 10
-    ) {
-      if (selectedId == null) {
-        // ajout de l'étudiant au serveur via le service "etudiantService"
-        const et = etudiantService.createEtudiant(formData);
-        etudiantService.add(et);
-      } else {
-        etudiantService.update(selectedId, formData);
+  // ─── Chargement initial ───────────────────────────────────────────────────
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await etudiantService.getAll();
+        setEtudiants(data);
+      } catch (err) {
+        setErreur(err.response?.data?.erreur || "Erreur chargement.");
       }
+    };
+    load();
+  }, []);
 
-      // mise à jour de l'affichage (re-render)
-      setEtudiant([...etudiantService.getAll()]);
-      resetForm(); // vider les input du formulaire
-    }
+  const fetchEtudiants = async () => {
+    const data = await etudiantService.getAll();
+    setEtudiants(data);
   };
 
   const resetForm = () => {
-    setFormData({
-      nom: "",
-      email: "",
-      telephone: "",
-    });
+    setFormData({ nom: "", email: "", telephone: "" });
     setSelectedId(null);
   };
 
-  const onEdit = (etudiant) => {
+  // ─── Ajout / Modification ─────────────────────────────────────────────────
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.nom.trim()) return;
+    try {
+      if (selectedId === null) {
+        await etudiantService.add(formData);
+      } else {
+        await etudiantService.update(selectedId, formData);
+      }
+      await fetchEtudiants();
+      resetForm();
+    } catch (err) {
+      setErreur(
+        err.response?.data?.erreur ||
+          err.response?.data?.msg ||
+          "Erreur lors de l'opération.",
+      );
+    }
+  };
+
+  // ─── Suppression ──────────────────────────────────────────────────────────
+  const handleDelete = async (id) => {
+    try {
+      await etudiantService.delete(id);
+      await fetchEtudiants();
+      if (selectedId === id) resetForm();
+    } catch (err) {
+      setErreur(
+        err.response?.data?.erreur ||
+          err.response?.data?.msg ||
+          "Erreur lors de la suppression.",
+      );
+    }
+  };
+
+  // ─── Edition ──────────────────────────────────────────────────────────────
+  const handleEdit = (etudiant) => {
     setSelectedId(etudiant.id_etudiant);
     setFormData({
       nom: etudiant.nom,
       email: etudiant.email,
-      telephone: etudiant.telephone,
+      telephone: etudiant.telephone ?? "",
     });
   };
 
-  const onDelete = (id) => {
-    etudiantService.remove(id);
-    setEtudiant([...etudiantService.getAll()]);
-  };
-
-  const cancel = () => {
-    console.log("cancel");
-
-    resetForm();
-  };
-
   return (
-    <>
-      <section className="container mt-4">
-        <EtudiantForm
-          formData={formData}
-          setFormData={setFormData}
-          handleSubmit={handleSubmit}
-          isEdit={selectedId}
-          cancel={cancel}
-        />
+    <section className="container mt-4">
+      <h2 className="mb-4">🎓 Gestion des étudiants</h2>
 
-        <h2 className="mb-4">🧑‍🎓 Liste des étudiants</h2>
-        <EtudiantListe
-          etudiants={etudiants}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      </section>
-    </>
+      {/* ─── Modal erreur ─────────────────────────────────────────────── */}
+      <ModalErreur erreur={erreur} setErreur={setErreur} />
+
+      {/* ─── Formulaire ───────────────────────────────────────────────── */}
+      <EtudiantForm
+        formData={formData}
+        setFormData={setFormData}
+        isEditing={selectedId !== null}
+        handleSubmit={handleSubmit}
+        handleCancel={resetForm}
+      />
+
+      {/* ─── Liste ────────────────────────────────────────────────────── */}
+      <EtudiantListe
+        etudiants={etudiants}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+    </section>
   );
 }
-
-// function ajouter(data) {
-//   return new Etudiant(
-//     Date.now(),
-//     data.nom,
-//     data.email,
-//     data.telephone,
-//   );
-
-// }

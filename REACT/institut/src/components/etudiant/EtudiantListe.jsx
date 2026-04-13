@@ -1,43 +1,49 @@
 export default function EtudiantListe({ etudiants, onEdit, onDelete }) {
   return (
-    <>
-      <table className="table table-bordered table-striped table-hover">
-        <thead>
-          <tr className="table-dark">
+    <div>
+      <h4 className="mb-3">🎓 Liste des étudiants</h4>
+      <table className="table table-bordered table-hover">
+        <thead className="table-dark">
+          <tr>
             <th>ID</th>
-            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
             <th>Téléphone</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {etudiants.map((etudiant) => (
-            <tr key={etudiant.id_etudiant}>
-              <td>{etudiant.id_etudiant}</td>
-              <td>{etudiant.nom}</td>
-              <td>{etudiant.telephone}</td>
-              <td>
+          {etudiants.length === 0 && (
+            <tr>
+              <td colSpan={5} className="text-center text-muted">
+                Aucun étudiant
+              </td>
+            </tr>
+          )}
+          {etudiants.map((e) => (
+            <tr key={e.id_etudiant}>
+              <td>{e.id_etudiant}</td>
+              <td>{e.nom}</td>
+              <td>{e.email}</td>
+              <td>{e.telephone ?? "—"}</td>
+              <td className="d-flex gap-1">
                 <button
-                  className="btn btn-warning mx-1"
-                  onClick={() => {
-                    onEdit(etudiant);
-                  }}
+                  className="btn btn-warning btn-sm"
+                  onClick={() => onEdit(e)}
                 >
                   ✏️
                 </button>
                 <button
-                  className="btn btn-danger"
-                  onClick={() => {
-                    onDelete(etudiant.id_etudiant);
-                  }}
+                  className="btn btn-danger btn-sm"
+                  onClick={() => onDelete(e.id_etudiant)}
                 >
-                  X
+                  ❌
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

@@ -3,11 +3,14 @@ import StageForm from "../components/stage/StageForm";
 import CrudTable from "../components/common/CrudTable";
 import stageService from "../services/StageService";
 import ModalErreur from "../components/common/ModalErreur";
+import { useNavigate } from "react-router-dom";
 
 export default function Stage() {
   const [stages, setStages] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [erreur, setErreur] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const load = async () => {
@@ -40,18 +43,22 @@ export default function Stage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    if (!formData.nom.trim()) return;
+      if (!formData.nom.trim()) return;
 
-    if (selectedId === null) {
-      await stageService.add(formData);
-    } else {
-      await stageService.update(selectedId, formData);
+      if (selectedId === null) {
+        await stageService.add(formData);
+      } else {
+        await stageService.update(selectedId, formData);
+      }
+
+      await fetchStages();
+      resetForm();
+    } catch (err) {
+      setErreur(err.response?.data?.erreur || "Erreur lors de la suppression.");
     }
-
-    await fetchStages();
-    resetForm();
   };
 
   const fetchStages = async () => {
@@ -59,11 +66,15 @@ export default function Stage() {
   };
 
   const handleDelete = async (stage) => {
-    await stageService.delete(stage.id_stage);
-    await fetchStages();
+    try {
+      await stageService.delete(stage.id_stage);
+      await fetchStages();
 
-    if (selectedId === stage.id_stage) {
-      resetForm();
+      if (selectedId === stage.id_stage) {
+        resetForm();
+      }
+    } catch (err) {
+      setErreur(err.response?.data?.erreur || "Erreur lors de la suppression.");
     }
   };
 
@@ -71,8 +82,8 @@ export default function Stage() {
     setSelectedId(stage.id_stage);
     setFormData({
       nom: stage.nom,
-      debut: stage.debut,
-      fin: stage.fin,
+      debut: stage.debut?.split("T")[0],
+      fin: stage.fin?.split("T")[0],
       description: stage.description,
     });
   };
@@ -102,6 +113,7 @@ export default function Stage() {
         rows={stages}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        detail={(stage) => navigate(`/stage/${stage.id_stage}`)}
       />
     </section>
   );

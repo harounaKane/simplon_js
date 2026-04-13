@@ -1,58 +1,64 @@
 export default function EtudiantForm({
   formData,
   setFormData,
+  isEditing,
   handleSubmit,
-  isEdit,
-  cancel,
+  handleCancel,
 }) {
-  const handleChange = (e) => {
-    // const {name, value} = e.target;
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
-    <>
-      <h2 className="mb-4">Gestion des étudiants</h2>
-      <form onSubmit={handleSubmit} className="d-flex gap-2 mb-4 flex-wrap">
-        <input
-          type="text"
-          name="nom"
-          className="form-control"
-          placeholder="nom"
-          value={formData.nom}
-          onChange={handleChange}
-          style={{ maxWidth: "220px" }}
-        />
-        <input
-          type="email"
-          name="email"
-          className="form-control"
-          placeholder="e-mail"
-          value={formData.email}
-          onChange={handleChange}
-          style={{ maxWidth: "220px" }}
-        />
-        <input
-          type="text"
-          name="telephone"
-          className="form-control"
-          placeholder="Téléphone"
-          value={formData.telephone}
-          onChange={handleChange}
-          style={{ maxWidth: "220px" }}
-        />
-
-        <input
+    <form onSubmit={handleSubmit} className="bg-light p-3 rounded mb-4">
+      <div className="row g-2">
+        <div className="col-md-4">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Nom"
+            value={formData.nom}
+            onChange={(e) => setFormData({ ...formData, nom: e.target.value })}
+            required
+          />
+        </div>
+        <div className="col-md-4">
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            required
+          />
+        </div>
+        <div className="col-md-4">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Téléphone"
+            value={formData.telephone}
+            onChange={(e) =>
+              setFormData({ ...formData, telephone: e.target.value })
+            }
+          />
+        </div>
+      </div>
+      <div className="mt-2 d-flex gap-2">
+        <button
           type="submit"
-          className={`btn btn-${isEdit ? "warning" : "success"}`}
-          value={isEdit ? "Modifier" : "Ajouter"}
-        />
-        {isEdit && (
-          <button type="button" className="btn btn-danger" onClick={cancel}>
-            Annulet
+          className={`btn ${isEditing ? "btn-warning" : "btn-primary"}`}
+        >
+          {isEditing ? "Modifier" : "Ajouter"}
+        </button>
+        {isEditing && (
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleCancel}
+          >
+            Annuler
           </button>
         )}
-      </form>
-    </>
+      </div>
+    </form>
   );
 }

@@ -1,5 +1,4 @@
 import { stagesData } from "../data/FakeData";
-import Stage from "../model/Stage";
 import api from "./api";
 
 // const formatDate = (dateISO) => dateISO?.split("T") ?? "";
@@ -46,32 +45,29 @@ class StageService {
 
   // 🔗 relations
 
-  inscrireEtudiant(idStage, idEtudiant) {
-    const stage = this.getById(idStage);
-    if (stage && !stage.etudiants.includes(idEtudiant)) {
-      stage.etudiants.push(idEtudiant);
-    }
+  async inscrireEtudiant(stageId, idEtudiant) {
+    const res = await api.post(`/stage/${stageId}/etudiants`, {
+      etudiantIds: [idEtudiant],
+    });
+    return res.data;
   }
 
-  ajouterMatiere(idStage, idMatiere) {
-    const stage = this.getById(idStage);
-    if (stage && !stage.matieres.includes(idMatiere)) {
-      stage.matieres.push(idMatiere);
-    }
+  async ajouterMatiere(idStage, idMatiere) {
+    console.log("ajouterMatiere appelé :", idStage, idMatiere); // ← log
+    const res = await api.post(`/stage/${idStage}/matieres`, {
+      matiereId: [idMatiere],
+    });
+    return res.data;
   }
 
-  retirerEtudiant(idStage, idEtudiant) {
-    const stage = this.getById(idStage);
-    if (stage) {
-      stage.etudiants = stage.etudiants.filter((e) => e !== idEtudiant);
-    }
+  async retirerEtudiant(stageId, idEtudiant) {
+    const res = await api.delete(`/stage/${stageId}/etudiants/${idEtudiant}`);
+    return res.data;
   }
 
-  retirerMatiere(idStage, idMatiere) {
-    const stage = this.getById(idStage);
-    if (stage) {
-      stage.matieres = stage.matieres.filter((m) => m !== idMatiere);
-    }
+  async retirerMatiere(stageId, matiereId) {
+    const res = await api.delete(`/stage/${stageId}/matieres/${matiereId}`);
+    return res.data;
   }
 }
 

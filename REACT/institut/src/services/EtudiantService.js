@@ -1,43 +1,25 @@
-import { etudiantsData } from "../data/FakeData";
-import Etudiant from "../model/Etudiant";
+import api from "./api";
 
 class EtudiantService {
-  etudiants = etudiantsData;
-
-  getAll() {
-    return this.etudiants;
+  async getAll() {
+    const res = await api.get("/etudiant");
+    return res.data.etudiants;
   }
-
-  getById(id) {
-    return this.etudiants.find((e) => e.id_etudiant === id);
+  async getById(id) {
+    const res = await api.get(`/etudiant/${id}`);
+    return res.data;
   }
-
-  add(data) {
-    const etudiant = new Etudiant(
-      Date.now(),
-      data.nom,
-      data.email,
-      data.telephone,
-    );
-
-    this.etudiants.push(etudiant);
-    return etudiant;
+  async add(data) {
+    const res = await api.post("/etudiant", data);
+    return res.data;
   }
-
-  update(id, data) {
-    const etudiant = this.getById(id);
-
-    if (etudiant) {
-      etudiant.nom = data.nom;
-      etudiant.email = data.email;
-      etudiant.telephone = data.telephone;
-    }
-
-    return etudiant;
+  async update(id, data) {
+    const res = await api.put(`/etudiant/${id}`, data);
+    return res.data;
   }
-
-  delete(id) {
-    this.etudiants = this.etudiants.filter((e) => e.id_etudiant !== id);
+  async delete(id) {
+    const res = await api.delete(`/etudiant/${id}`);
+    return res.data;
   }
 }
 
