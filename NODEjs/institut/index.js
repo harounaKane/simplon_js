@@ -22,7 +22,7 @@ app.use("/stage", stageRouter);
 app.use("/etudiant", etudiantRouter);
 app.use("/user", userRoute);
 
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync().then(() => {
   app.listen(process.env.PORT, () => {
     console.log(`Port : http://localhost:${process.env.PORT}`);
   });

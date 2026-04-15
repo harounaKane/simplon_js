@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const inscription = async (req, res) => {
   try {
@@ -23,6 +24,44 @@ export const inscription = async (req, res) => {
     const { mdp: _, ...userSansMdp } = user.toJSON();
 
     res.status(200).json(userSansMdp);
+  } catch (err) {
+    return res.status(500).json({ erreur: err.message });
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { login, mdp } = req.body;
+
+    const user = await User.findOne({ where: { login } });
+
+    // test si login pas correct
+    if (!user)
+      return res
+        .status(401)
+        .json({ message: "Login ou mot de passe incorrect !" });
+
+    // si user, test si mdp saisi == mdp BD
+    const mdpValide = await bcrypt.compare(mdp, user.mdp);
+
+    // test si login correct
+    if (!mdpValide)
+      return res
+        .status(401)
+        .json({ message: "Login ou mot de passe incorrect !" });
+
+    // générer un token
+    const token = jwt.sign(
+      { id: user.id, login: user.login, role: user.role },
+      process.env.TOKEN,
+      { expiresIn: "1h" },
+    );
+
+    const { mdp: _, ...userSansMdp } = user.toJSON();
+
+    res
+      .status(200)
+      .json({ message: "Connexion réussie", token, user: userSansMdp });
   } catch (err) {
     return res.status(500).json({ erreur: err.message });
   }
