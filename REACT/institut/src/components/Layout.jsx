@@ -18,33 +18,35 @@ export default function Layout({ children }) {
     <div className="containerLayout">
       {/* HEADER */}
       <header>
-        <div className="container d-flex justify-content-between align-items-center py-3 flex-wrap gap-2">
-          <h4 className="fw-bold m-0">
+        <div className="container d-flex justify-content-between align-items-center py-3 gap-3">
+          {/* Logo */}
+          <h4 className="fw-bold m-0 flex-shrink-0">
             <img src={logo} alt="logo" className="logo" />
           </h4>
 
-          <nav className="d-flex gap-2 flex-wrap">
+          {/* Nav links — au centre, prend l'espace disponible */}
+          <nav className="d-flex gap-2 align-items-center flex-grow-1">
             <NavLink className={selectedLink} to="/">
               Home
             </NavLink>
+            <NavLink className={selectedLink} to="/etudiant">
+              Étudiants
+            </NavLink>
+            <NavLink className={selectedLink} to="/prof">
+              Profs
+            </NavLink>
+            <NavLink className={selectedLink} to="/matiere">
+              Matières
+            </NavLink>
+            <NavLink className={selectedLink} to="/stage">
+              Stages
+            </NavLink>
           </nav>
 
-          {/* Boutons Auth */}
-          <div className="d-flex align-items-center gap-2">
+          {/* Boutons Auth — à droite */}
+          <div className="d-flex align-items-center gap-2 flex-shrink-0">
             {isConnected ? (
               <>
-                <NavLink className={selectedLink} to="/etudiant">
-                  Étudiants
-                </NavLink>
-                <NavLink className={selectedLink} to="/prof">
-                  Profs
-                </NavLink>
-                <NavLink className={selectedLink} to="/matiere">
-                  Matières
-                </NavLink>
-                <NavLink className={selectedLink} to="/stage">
-                  Stages
-                </NavLink>
                 <span className="text-white fw-semibold small">
                   {user?.login}
                   {user?.role === "ADMIN" && (
